@@ -1,0 +1,11 @@
+*.DS_Store
+*.log
+*.zip
+.idea
+/configuraciones/basedatos.php
+/controladores/cargos.php
+/controladores/empleados.php
+/modelos/cargosmodelo.php
+/modelos/empleadosmodelo.php 
+
+.env
