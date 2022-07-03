@@ -103,7 +103,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="../UI/icons.html" class="nav-link">
+                <a href="/pedidos/buscar" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Buscar</p>
                 </a>
@@ -115,6 +115,188 @@
                 </a>
               </li>
             </ul>
+          </li>
+          <li class="nav-item">
+            <a href="/" class="nav-link">
+              <i class="nav-icon fas fa-box"></i>
+              <p>
+                Pedidos Detalle
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview" style="display: none;">
+              <li class="nav-item">
+                <a href="/detallepedido" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Listar</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="../UI/icons.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Buscar</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/detallepedido/nuevo" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Nuevo</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="/" class="nav-link">
+              <i class="nav-icon fas fa-box"></i>
+              <p>
+                Pedidos Llevar
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview" style="display: none;">
+              <li class="nav-item">
+                <a href="/pedidosllevar" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Listar</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="../UI/icons.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Buscar</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/pedidosllevar/nuevo" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Nuevo</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="/" class="nav-link">
+              <i class="nav-icon fas fa-box"></i>
+              <p>
+                Pedidos Ventas
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview" style="display: none;">
+              <li class="nav-item">
+                <a href="/pedidosventas" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Listar</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="../UI/icons.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Buscar</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/pedidosventas/nuevo" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Nuevo</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="/" class="nav-link">
+              <i class="nav-icon fas fa-box"></i>
+              <p>
+                Pedidos Cancelados
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview" style="display: none;">
+              <li class="nav-item">
+                <a href="/pedidoscancelados" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Listar</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="../UI/icons.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Buscar</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/pedidoscancelados/nuevo" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Nuevo</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="/" class="nav-link">
+              <i class="nav-icon fas fa-box"></i>
+              <p>
+                Pedidos Elaborados
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview" style="display: none;">
+              <li class="nav-item">
+                <a href="/Pedidoselaborados" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Listar</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="../UI/icons.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Buscar</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/Pedidoselaborados/nuevo" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Nuevo</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="/" class="nav-link">
+              <i class="nav-icon fas fa-box"></i>
+              <p>
+                Pedidos Mesa
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview" style="display: none;">
+              <li class="nav-item">
+                <a href="/pedidosmesa" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Listar</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="../UI/icons.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Buscar</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/pedidosmesa/nuevo" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Nuevo</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="inicio/logout" class="nav-link" onclick="">
+              <i class="nav-icon fas fa-window-close"></i>
+              <p>
+                Cerrar sesion
+              </p>
+            </a>
           </li>
         </ul>
       </nav>

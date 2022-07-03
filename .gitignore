@@ -7,5 +7,7 @@
 /controladores/empleados.php
 /modelos/cargosmodelo.php
 /modelos/empleadosmodelo.php 
+/vistas/cargos.php
+/vistas/empleados.php
 
 .env

@@ -6,6 +6,7 @@
     <script src="/public/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- overlayScrollbars -->
     <script src="/public/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <script src="/public/plugins/bootstrap-switch/js/bootstrap-switch.js"></script>
     <!-- AdminLTE App -->
     <script src="/public/js/adminlte.js"></script>
 </body>

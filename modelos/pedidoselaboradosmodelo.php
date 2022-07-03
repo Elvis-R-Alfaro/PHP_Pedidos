@@ -53,9 +53,15 @@ class pedidoselaboradosModelo extends Modelo{
         $query->execute($datos);
      }
 
-     public function eliminar($datos){
-        $query = $this->db->conectar()->prepare(' delete from pedidos_elaborados where iddetallepedido=:id ');
-        $query->execute($datos);
+     public function eliminar($id){
+        try {
+            $query = $this->db->conectar()->query('delete from pedidos_elaborados where iddetallepedido='.$id);
+            $query->execute();
+            return $query;
+        } catch (Throwable $th) {
+            return $th;
+        }
+        
      }
 
 }

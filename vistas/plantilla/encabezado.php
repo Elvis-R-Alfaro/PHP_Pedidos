@@ -13,6 +13,8 @@
   <link rel="stylesheet" href="/public/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="/public/css/adminlte.min.css">
+  <link rel="stylesheet" href="/public/plugins/bootstrap-switch/css/bootstrap3/bootstrap-switch.css"> 
+  <link rel="stylesheet" href="/public/plugins/bootstrap-switch/css/bootstrap2/bootstrap-switch.css"> 
 </head>
 <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
     
