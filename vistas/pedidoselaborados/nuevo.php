@@ -32,6 +32,7 @@ $r=$n1+$n2;
                   <div class="form-group">
                     <label for="textareaDescricion">Id usuario</label>
                     <select class="form-control" name="idusuario">
+                    <option value="" selected disabled hidden>Seleccione un valor</option>
                       <?php
                       foreach ($this->datos as $usuario) { ?>
                         <option value=" <?php echo $usuario['idregistro'] ?>"><?php echo $usuario['loginusuario'] ?></option>

@@ -83,6 +83,37 @@ class pedidoselaboradosModelo extends Modelo{
             return $th;
         }
     }
+
+    public function listarResultados($filtro,$buscar,$estado){
+        $lista=[];
+        try {            
+            if($buscar == ''){
+                $sql = 'select pedidos_elaborados.*,usuarios.LoginUsuario from pedidos_elaborados join usuarios on pedidos_elaborados.idusuario=usuarios.idregistro';
+            }
+            else{
+                $sql = 'select pedidos_elaborados.*,usuarios.LoginUsuario from pedidos_elaborados inner join usuarios on pedidos_elaborados.idusuario=usuarios.idregistro
+                WHERE '.$filtro .' LIKE "%'.$buscar.'%"';
+            }
+            
+            $query = $this->db->conectar()->query($sql);
+            foreach ($query as $row) {
+                $pedido =[
+                    'iddetallepedido'=>$row['iddetallepedido'],
+                    'idusuario'=>$row['idusuario'],
+                    'fechahora'=>$row['fechahora'],//array que esta dentro de una variable
+                    'loginusuario'=>$row['LoginUsuario']//array que esta dentro de una variable
+                    
+                ];
+                
+                array_push($lista,$pedido);
+            }
+            return $lista;
+        } catch (\Throwable $th) {
+            var_dump($th);
+        }
+    }
+
+
 }
 
 ?>
