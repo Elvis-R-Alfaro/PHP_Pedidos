@@ -32,7 +32,7 @@
                       <?php foreach($this->datos as $row) { ?>
                         <tr>
                           <td><a href="/Pedidoselaborados/buscarid?id=<?php echo $row['iddetallepedido']; ?>"><?php echo $row['iddetallepedido']; ?></a></td>
-                          <td><?php echo $row['idusuario']; ?></td>
+                          <td><?php echo $row['loginusuario']; ?></td>
                           <td>
                           <div class="sparkbar" data-color="#00a65a" data-height="20"><?php echo $row['fechahora']; ?></div>
                           </td>

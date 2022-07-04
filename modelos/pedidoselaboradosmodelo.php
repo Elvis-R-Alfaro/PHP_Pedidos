@@ -12,13 +12,14 @@ class pedidoselaboradosModelo extends Modelo{
     public function listar(){
         $lista=[];
         try{
-            $sql='select iddetallepedido, idusuario, fechahora from pedidos_elaborados';
+            $sql='select pedidos_elaborados.*,usuarios.LoginUsuario from pedidos_elaborados join usuarios on pedidos_elaborados.idusuario=usuarios.idregistro';
             $query = $this->db->conectar()->query($sql);
             foreach($query as $row){
                 $pedidoelaborado=[//esto es un array 18-22
                     'iddetallepedido'=>$row['iddetallepedido'],
                     'idusuario'=>$row['idusuario'],
-                    'fechahora'=>$row['fechahora']//array que esta dentro de una variable
+                    'fechahora'=>$row['fechahora'],//array que esta dentro de una variable
+                    'loginusuario'=>$row['LoginUsuario']//array que esta dentro de una variable
                 ];
                 array_push($lista, $pedidoelaborado);//lista = array de array o array de 2 dimensiones
             }
@@ -31,13 +32,14 @@ class pedidoselaboradosModelo extends Modelo{
     public function buscarID($id){
         $lista=[];
         try{
-            $sql='select iddetallepedido, idusuario, fechahora from pedidos_elaborados where iddetallepedido =  '. $id;
+            $sql='select pedidos_elaborados.*,usuarios.LoginUsuario from pedidos_elaborados JOIN usuarios ON usuarios.idregistro = pedidos_elaborados.idusuario where iddetallepedido ='. $id;
             $query = $this->db->conectar()->query($sql);
             foreach($query as $row){
                 $pedidoelaborado=[//esto es un array 18-22
                     'iddetallepedido'=>$row['iddetallepedido'],
                     'idusuario'=>$row['idusuario'],
-                    'fechahora'=>$row['fechahora']//array que esta dentro de una variable
+                    'fechahora'=>$row['fechahora'],//array que esta dentro de una variable
+                    'loginusuario'=>$row['LoginUsuario']//array que esta dentro de una variable
                 ]; 
                 array_push($lista, $pedidoelaborado);//lista = array de array o array de 2 dimensiones
                 
@@ -64,6 +66,23 @@ class pedidoselaboradosModelo extends Modelo{
         
      }
 
+     public function listarusuarios(){
+        $lista=[];
+        try{
+            $sql='select idregistro, LoginUsuario from usuarios';
+            $query = $this->db->conectar()->query($sql);
+            foreach($query as $row){
+                $pedidoelaborado=[//esto es un array 18-22
+                    'idregistro'=>$row['idregistro'],
+                    'loginusuario'=>$row['LoginUsuario']//array que esta dentro de una variable
+                ];
+                array_push($lista, $pedidoelaborado);//lista = array de array o array de 2 dimensiones
+            }
+            return $lista;
+        }catch (\Throwable $th){
+            return $th;
+        }
+    }
 }
 
 ?>

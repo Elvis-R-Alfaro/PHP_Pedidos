@@ -27,11 +27,18 @@ $r=$n1+$n2;
                 <div class="card-body">
                   <div class="form-group">
                     <label for="inputNombre">Id Detalle Pedidos</label>
-                    <input type="number" name="iddetallepedido" class="form-control" id="inputNombre" placeholder="Escriba el nombre del cargo" required>
+                    <input type="number" name="iddetallepedido" class="form-control" id="inputNombre" placeholder="Escriba el id detalle pedido" required>
                   </div>
                   <div class="form-group">
                     <label for="textareaDescricion">Id usuario</label>
-                    <input type="number" name="idusuario" class="form-control" id="textareaDescricion" placeholder="Escriba la descripcion del cargo">
+                    <select class="form-control" name="idusuario">
+                      <?php
+                      foreach ($this->datos as $usuario) { ?>
+                        <option value=" <?php echo $usuario['idregistro'] ?>"><?php echo $usuario['loginusuario'] ?></option>
+                      <?php
+                      }
+                      ?>
+                    </select>
                   </div>
                   <div class="form-group">
                     <label for="textareaDescricion">Fecha Hora</label>

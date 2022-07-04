@@ -31,7 +31,15 @@ $r=$n1+$n2;
                   </div>
                   <div class="form-group">
                     <label for="textareaDescricion">Id usuario</label>
-                    <input type="number" name="idusuario" class="form-control" value="<?php echo strval($this->datos[0]['idusuario']);?>" id="textareaDescricion" placeholder="Escriba la descripcion del cargo">
+                    <select class="form-control" name="idusuario">
+                    <option value="<?php echo $this->datos[0]['idusuario'] ?>"><?php echo $this->datos[0]['loginusuario']?></option>
+                      <?php
+                      foreach ($this->datos as $usuario) { ?>
+                        <option value=" <?php echo $usuario['idregistro'] ?>"><?php echo $usuario['loginusuario'] ?></option>
+                      <?php
+                      }
+                      ?>
+                    </select>
                   </div>
                   <div class="form-group">
                     <label for="textareaDescricion">Fecha Hora</label>

@@ -16,7 +16,10 @@ class Pedidoselaborados extends Controlador{
     function nuevo(){
         $this->vista->titulo = 'Nuevo Pedido Elaborado';
         $this->vista->url = 'Pedidoselaborados/nuevo';
+        $this->setModelo('pedidoselaborados');
+        $this->vista->datos = $this->modelo->listarusuarios();
         $this->vista->render('Pedidoselaborados/nuevo');
+        
     }
     function guardar(){
         try {
