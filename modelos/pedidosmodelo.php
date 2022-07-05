@@ -28,13 +28,13 @@ class PedidosModelo extends Modelo{
                 $sql = 'SELECT pedidos.*,meseros.nombre AS nombremesero,estaciones.nombre AS nombreestacion FROM pedidos 
                 JOIN meseros ON pedidos.idmesero = meseros.idmesero 
                 JOIN estaciones on pedidos.Estacion = estaciones.NumeroEstacion 
-                WHERE pedidos.activo = '.$estado;
+                WHERE pedidos.estado != "AAA"';
             }
             else{
                 $sql = 'SELECT pedidos.*,meseros.nombre AS nombremesero, estaciones.nombre AS nombreestacion FROM pedidos
                 INNER JOIN meseros ON pedidos.idmesero = meseros.idmesero
                 INNER JOIN estaciones ON pedidos.Estacion = estaciones.NumeroEstacion
-                WHERE '.$filtro .' LIKE "%'.$buscar.'%" AND pedidos.activo = '.$estado;
+                WHERE '.$filtro .' LIKE "%'.$buscar.'%" AND pedidos.estado != AAA';
             }
             
             $query = $this->db->conectar()->query($sql);
@@ -72,10 +72,10 @@ class PedidosModelo extends Modelo{
                 }
                 // isset($pedido['activo'])? 'Activo':'Inactivo';
                 if($pedido['activo'] == '1'){
-                    $pedido['activo'] = 'Activo';
+                    $pedido['activo'] = 'Pendiente';
                 }
                 else{
-                    $pedido['activo'] = 'Inactivo';
+                    $pedido['activo'] = 'Finalizado';
                 }
                 if($pedido['modalidad'] == 'DO'){
                     $pedido['modalidad'] = 'Domicilio';
@@ -103,6 +103,24 @@ class PedidosModelo extends Modelo{
             foreach ($query as $row) {
                 $mesero =[
                     'idmesero' => $row['idmesero'],
+                    'nombre' => $row['nombre']
+                ];
+                array_push($lista,$mesero);
+            }
+            return $lista;
+        } catch (\Throwable $th) {
+            var_dump($th);
+        }
+    }
+
+    public function listarClientes(){
+        $lista=[];
+        try {
+            $sql = 'SELECT * FROM clientes';
+            $query = $this->db->conectar()->query($sql);
+            foreach ($query as $row) {
+                $mesero =[
+                    'idcliente' => $row['idcliente'],
                     'nombre' => $row['nombre']
                 ];
                 array_push($lista,$mesero);

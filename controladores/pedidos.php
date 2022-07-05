@@ -29,6 +29,7 @@ class Pedidos extends Controlador{
             $this->vista->titulo = 'Nuevo pedido';
             $this->vista->url = 'pedidos/nuevo';
             $this->setModelo('pedidos');
+            $this->vista->clientes = $this->modelo->listarClientes();
             $this->vista->datos = $this->modelo->listarMeseros();
             $this->vista->estaciones = $this->modelo->listarEstaciones();
             $this->vista->render('pedidos/nuevo');
@@ -93,7 +94,18 @@ class Pedidos extends Controlador{
 
     function guardar(){
         try {
-            $idmesero = $_POST['idmesero'];
+            foreach($_POST['detallePedido'] as $item){
+                echo $item["producto"];
+                echo '<br>';
+                echo $item["cantidad"];
+                echo '<br>';
+                echo $item["subproducto"];
+                echo '<br>';
+                echo $item["notas"];
+                echo '<br>';
+            }
+            print_r($_POST['detallePedido']=array('producto','cantidad','subproducto','notas'));
+            /* $idmesero = $_POST['idmesero'];
             $fechahora = date('Y-m-d H:i:s',time());
             $Estacion = $_POST['Estacion'];
             $activo = $_POST['activo'];
@@ -106,7 +118,7 @@ class Pedidos extends Controlador{
             $this -> setModelo('pedidos');
             $this -> modelo -> insert(['idmesero' => $idmesero, 'fechahora' => $fechahora, 'Estacion' => $Estacion, 'activo' => $activo, 'modalidad' => $modalidad, 'estado' => $estado]);
             header('Location: /pedidos', true, 301);
-            exit();
+            exit() */;
         } catch (\Throwable $th) {
             var_dump($th); //tirar error y para la ejecusion del programa
         }

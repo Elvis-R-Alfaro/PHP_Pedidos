@@ -28,7 +28,7 @@
                       <th>MESERO</th>
                       <th>FECHA Y HORA</th>
                       <th>ESTACION</th>
-                      <!-- <th>ESTADO</th> -->
+                      <th>ESTADO</th>
                       <th>MODALIDAD</th>
                       <th>ESTADO DEL PEDIDO</th>
                     </tr>
@@ -40,10 +40,10 @@
                         <td><?php echo $row['nombremesero']; ?></td>
                         <td><?php echo $row['fechahora']; ?></td>
                         <td><?php echo $row['nombreestacion']; ?></td>
-                       <!--  <td><?php echo $row['activo']; ?></td> -->
+                       <td><?php echo $row['activo']; ?></td>
                         <td><?php echo $row['modalidad']; ?></td>
                         <td>
-                          <!-- <?php echo $row['estado']; ?> -->
+                          <?php echo $row['estado']; ?>
                           <!-- <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
                             <input type="checkbox" readonly class="custom-control-input"  id="elaborado<?php echo $row['NumeroPedido']; ?>" name="elaborado<?php echo $row['NumeroPedido']; ?>" value="<?php echo $row['elaborado']; ?>" checked control-id="ControlID-45">
                             <label class="custom-control-label"  for="elaborado<?php echo $row['NumeroPedido']; ?>">Elaborado</label>
