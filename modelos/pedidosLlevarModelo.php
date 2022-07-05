@@ -82,6 +82,7 @@ class PedidosLLevarModelo extends Modelo{
         }
     }
 
+    
     public function listarResultados($filtro,$buscar,$estado){
         $lista=[];
         try {            

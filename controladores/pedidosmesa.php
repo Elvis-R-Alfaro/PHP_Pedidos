@@ -16,8 +16,12 @@ class Pedidosmesa extends Controlador{
         $this->vista->render('pedidosmesa/index');
     }
     function nuevo(){
+        session_start();
         $this->vista->titulo = 'Nuevo Pedido Mesa';
         $this->vista->url = 'pedidosmesa/nuevo';
+        $this->setmodelo('pedidosmesa');
+        $this->vista->pedidos = $this->modelo->listarPedidos();
+        $this->vista->mesas = $this->modelo->listarMesa();
         $this->vista->render('pedidosmesa/nuevo');
     }
     function guardar(){

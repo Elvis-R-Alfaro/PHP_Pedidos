@@ -30,7 +30,46 @@ class pedidosmesaModelo extends Modelo{
         }
     }
 
-    public function buscarid($idpedido){
+    
+    public function listarMesa(){
+        $lista=[];
+        try {
+            $sql = 'select * from mesas_x_area';
+            $query = $this->db->conectar()->query($sql);
+            foreach ($query as $row) {
+                $mesas =[
+                    'Mesa' => $row['Mesa'],
+                    'idregistro' => $row['idregistro'],
+                    
+                    
+                ];
+                array_push($lista,$mesas);
+            }
+            return $lista;
+        } catch (\Throwable $th) {
+            var_dump($th);
+        }
+    }
+
+
+    public function listarPedidos(){
+        $lista=[];
+        try {
+            $sql = 'select NumeroPedido from pedidos';
+            $query = $this->db->conectar()->query($sql);
+            foreach ($query as $row) {
+                $pedidos =[
+                    'NumeroPedido' => $row['NumeroPedido'],
+                ];
+                array_push($lista,$pedidos);
+            }
+            return $lista;
+        } catch (\Throwable $th) {
+            var_dump($th);
+        }
+    }
+
+    public function buscarid($id){
         $lista = [];
         try {
             $sql = 'select * from pedidos_mesa where idpedido='.$idpedido;
