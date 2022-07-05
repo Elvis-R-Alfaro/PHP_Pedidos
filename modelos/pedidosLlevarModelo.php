@@ -23,10 +23,12 @@ class PedidosLLevarModelo extends Modelo{
     public function listar(){
         $lista=[];
         try {
-            $sql = 'select * from pedidos_llevar';
+            $sql = 'select pedidos_llevar.*, clientes.nombre from pedidos_llevar join clientes 
+            on pedidos_llevar.idcliente = clientes.idcliente';
             $query = $this->db->conectar()->query($sql);
             foreach ($query as $row) {
                 $pedido_llevar =[
+                    'nombre' => $row['nombre'],
                     'idregistro' => $row['idregistro'],
                     'idpedido' => $row['idpedido'],
                     'idcliente' => $row['idcliente']
@@ -40,13 +42,86 @@ class PedidosLLevarModelo extends Modelo{
         }
     }
 
+
+    public function listarClientes(){
+        $lista=[];
+        try {
+            $sql = 'select * from clientes';
+            $query = $this->db->conectar()->query($sql);
+            foreach ($query as $row) {
+                $clientes =[
+                    'nombre' => $row['nombre'],
+                    'idcliente' => $row['idcliente'],
+                    
+                    
+                ];
+                array_push($lista,$clientes);
+            }
+            return $lista;
+        } catch (\Throwable $th) {
+            var_dump($th);
+        }
+    }
+
+
+
+    public function listarPedidos(){
+        $lista=[];
+        try {
+            $sql = 'select NumeroPedido from pedidos';
+            $query = $this->db->conectar()->query($sql);
+            foreach ($query as $row) {
+                $pedidos =[
+                    'NumeroPedido' => $row['NumeroPedido'],
+                ];
+                array_push($lista,$pedidos);
+            }
+            return $lista;
+        } catch (\Throwable $th) {
+            var_dump($th);
+        }
+    }
+
+    public function listarResultados($filtro,$buscar,$estado){
+        $lista=[];
+        try {            
+            if($buscar == ''){
+                $sql = 'select pedidos_llevar.*, clientes.nombre from pedidos_llevar join clientes 
+                on pedidos_llevar.idcliente = clientes.idcliente';
+            }
+            else{
+                $sql = 'select pedidos_llevar.*, clientes.nombre from pedidos_llevar inner join clientes 
+                on pedidos_llevar.idcliente = clientes.idcliente
+                WHERE '.$filtro .' LIKE "%'.$buscar.'%"';
+            }
+            
+            $query = $this->db->conectar()->query($sql);
+            foreach ($query as $row) {
+                $pedido =[
+                    'idregistro' => $row['idregistro'],
+                    'idpedido' => $row['idpedido'],
+                    'idcliente' => $row['idcliente'],
+                    'nombre' => $row['nombre']
+                    
+                ];
+                array_push($lista,$pedido);
+            }
+            return $lista;
+        } catch (\Throwable $th) {
+            var_dump($th);
+        }
+    }
+    
+
     public function buscarId($id){
         $lista=[];
         try {
-            $sql = 'select * from pedidos_llevar where idregistro='.$id;
+            $sql = 'select pedidos_llevar.*, clientes.nombre from pedidos_llevar join clientes 
+            on pedidos_llevar.idcliente = clientes.idcliente where idregistro = '.$id;
             $query = $this->db->conectar()->query($sql);
             foreach ($query as $row) {
                 $pedido_listar =[
+                    'nombre' => $row['nombre'],
                     'id' => $row['idregistro'],
                     'idpedido' => $row['idpedido'],
                     'idcliente' => $row['idcliente']
