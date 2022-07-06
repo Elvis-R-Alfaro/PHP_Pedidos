@@ -161,7 +161,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="../UI/icons.html" class="nav-link">
+                <a href="../pedidosllevar/buscar" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Buscar</p>
                 </a>

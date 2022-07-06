@@ -25,8 +25,8 @@
                     <input type="number" class="form-control" readonly value="<?php echo strval($this->datos[0]['iddetallepedido']);?>" >
                   </div>
                   <div class="form-group">
-                    <label for="textareaDescricion">Id usuario</label>
-                    <input type="number"class="form-control" readonly value="<?php echo strval($this->datos[0]['idusuario']);?>">
+                    <label for="textareaDescricion">Usuario</label>
+                    <input type="text"class="form-control" readonly value="<?php echo $this->datos[0]['loginusuario'];?>">
                   </div>
                   <div class="form-group">
                     <label for="textareaDescricion">Fecha Hora</label>
