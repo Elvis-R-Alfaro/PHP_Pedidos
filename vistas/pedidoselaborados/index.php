@@ -23,8 +23,8 @@
                     <table class="table m-0">
                       <thead>
                       <tr>
-                        <th>IDDETALLEPEDIDO</th>
-                        <th>IDUSUARIO</th>
+                        <th>N°DETALLEPEDIDO</th>
+                        <th>USUARIO</th>
                         <th>FECHAHORA</th>
                       </tr>
                       </thead>
