@@ -9,52 +9,85 @@ class Pedidoscancelados extends Controlador{
         //echo "<h2>Controlador de inicio</h2>";
     }
     function inicio(){
-        $this->vista->titulo = 'Pedidos Cancelados';
-        $this->vista->url = 'pedidoscancelados';
-        $this->setModelo('pedidoscancelados');
-        $this->vista->datos=$this->modelo->select();
-        $this->vista->render('pedidoscancelados/index');
+        session_start(); 
+        if(isset($_SESSION['usuario'])){ 
+            $this->vista->titulo = 'Pedidos Cancelados';
+            $this->vista->url = 'pedidoscancelados';
+            $this->setModelo('pedidoscancelados');
+            $this->vista->datos=$this->modelo->select();
+            $this->vista->render('pedidoscancelados/index');
+        }
+        else{
+            header('Location: /inicio');
+        }
     }
     function nuevo(){
-        $this->vista->titulo = 'Nuevo Pedido Cancelado';
+        session_start(); 
+        if(isset($_SESSION['usuario'])){ 
+        $this->vista->titulo = 'Nuevo pedido a cancelar';
         $this->vista->url = 'pedidoscancelados/nuevo';
+        $this->setModelo('pedidoscancelados');
+        $this->vista->usuarios = $this->modelo->listarusuarios();
+        $this->vista->pedidos = $this->modelo->listarPedidos();
         $this->vista->render('pedidoscancelados/nuevo');
     }
+    else{
+        header('Location: /inicio');
+    } 
+    }
+
+
+    function listar() {
+        $this->setModelo('pedidoscancelados');
+        $this->vista->datos = $this->modelo->listar();
+    }
+
+
+
     function guardar(){
         try {
             $numeropedido = $_POST['numeropedido'];
             $usuario = $_POST['usuario'];
             $fechahora = $_POST['fechahora'];
-            $this->setModelo('pedidoscancelados');
-            $this->modelo->insert(["numeropedido"=>$numeropedido, "usuario"=>$usuario, "fechahora"=>$fechahora]);
-            header("Location: /pedidoscancelados/", TRUE, 301);
+            $this -> setModelo('pedidoscancelados');
+            $this -> modelo -> insert(['numeropedido' => $numeropedido, 'usuario' => $usuario, 'fechahora'=>$fechahora]);
+            header('Location: /pedidoscancelados', true, 301);
             exit();
         } catch (\Throwable $th) {
-            var_dump($th);
+            var_dump($th); //tirar error y para la ejecusion del programa
         }
-        //var_dump($_POST);
-        
-        /*$this->vista->titulo = 'Cargos';
-        $this->vista->url = 'cargos';
-        $this->vista->render('cargos/index');*/
     }
     function buscarid(){
         $id=$_GET['id'];
         $this->vista->titulo = 'Mostrando Pedidos Cancelados';
         $this->vista->url = 'pedidoscancelados/buscarid';
         $this->setModelo('pedidoscancelados');
+        $this->vista->usuarios=$this->modelo->listarusuarios();
+        $this->vista->pedidos=$this->modelo->listarPedidos();
         $this->vista->datos=$this->modelo->buscarid($id);
         $this->vista->render('pedidoscancelados/buscarid');
     }
 
-    function actualizar(){
-        $id=$_GET['id'];
-        $this->vista->titulo = 'Editando Pedidos Cancelados';
-        $this->vista->url = 'pedidoscancelados/actualizar';
-        $this->setModelo('pedidoscancelados');
-        $this->vista->datos=$this->modelo->buscarid($id);
-        $this->vista->render('pedidoscancelados/actualizar');
+    function buscar(){
+        session_start(); 
+        if(isset($_SESSION['usuario'])){ 
+            try {
+                isset($_POST['filtro']) ? $filtro = $_POST['filtro'] : $filtro = '';
+                isset($_POST['buscar']) ? $buscar = $_POST['buscar'] : $buscar = '';
+                $this->vista->titulo = 'Buscar pedido a cancelar';
+                $this->vista->url = 'pedidoscancelados/buscar';
+                $this->setModelo('pedidoscancelados');
+                $this->vista->datos = $this->modelo->listarResultados($filtro,$buscar,1);
+                $this->vista->render('pedidoscancelados/buscar');            
+            } catch (\Throwable $th) {
+                var_dump($th);
+            }
+        }
+        else{
+            header('Location: /inicio');
+        }
     }
+
 
     function editar(){
         try {
@@ -70,26 +103,20 @@ class Pedidoscancelados extends Controlador{
         }
     }
 
-    function eliminar(){
-        $id=$_GET['id'];
-        $this->vista->titulo = 'Eliminando Pedidos Cancelados';
-        $this->vista->url = 'pedidoscancelados/eliminar';
-        $this->setModelo('pedidoscancelados');
-        $this->vista->datos=$this->modelo->buscarid($id);
-        $this->vista->render('pedidoscancelados/eliminar');
-    }
 
-    function borrar(){
+    function eliminar(){
         try {
-            $id=$_GET['id'];
+            $id = $_GET['id'];
             $this->setModelo('pedidoscancelados');
-            $this->modelo->delete(["numeropedido"=>$id]);
-            header("Location: /pedidoscancelados/", TRUE, 301);
+            $query=$this->modelo->delete($id);
+            print_r($query);
+            header("Location: /pedidoscancelados/");
             exit();
         } catch (\Throwable $th) {
             var_dump($th);
         }
     }
+
 
 }
 

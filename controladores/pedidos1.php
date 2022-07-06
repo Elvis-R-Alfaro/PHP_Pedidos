@@ -1,22 +1,21 @@
 <?php
 
-
-class Pedidos extends Controlador{
+class Pedidos1 extends Controlador{
     function __construct(){
         parent::__construct();
-        $this->vista->titulo = 'Pedidos';
-        $this->vista->url = 'pedidos';
+        $this->vista->titulo = 'Pedidos1';
+        $this->vista->url = 'pedidos1';
         //$this->vista->render('cargos/index');
         //echo "<h2>Controlador de inicio</h2>";
     }
     function inicio(){
         session_start(); 
         if(isset($_SESSION['usuario'])){ 
-            $this->vista->titulo = 'Pedidos';
-            $this->vista->url = 'pedidos';
+            $this->vista->titulo = 'Pedidos1';
+            $this->vista->url = 'pedidos1';
             $this->setModelo('pedidos');
             $this->vista->datos = $this->modelo->listar('','',1);
-            $this->vista->render('pedidos/index');
+            $this->vista->render('pedidos1/index');
         }
         else{
             header('Location: /inicio');
@@ -24,24 +23,11 @@ class Pedidos extends Controlador{
 
         
     }
-    function anulados(){
-        session_start(); 
-        if(isset($_SESSION['usuario'])){ 
-            $this->vista->titulo = 'Pedidos Anulados';
-            $this->vista->url = 'pedidos/anulados';
-            $this->setModelo('pedidos');
-            $this->vista->datos = $this->modelo->listarAnulados();
-            $this->vista->render('pedidos/anulados');
-        }
-        else{
-            header('Location: /inicio');
-        } 
-    }
     function nuevo(){
         session_start(); 
         if(isset($_SESSION['usuario'])){ 
             $this->vista->titulo = 'Nuevo pedido';
-            $this->vista->url = 'pedidos/nuevo';
+            $this->vista->url = 'pedidos1/nuevo';
             $this->setModelo('pedidos');
             $this->vista->clientes = $this->modelo->listarClientes();
             $this->vista->datos = $this->modelo->listarMeseros();
@@ -50,7 +36,7 @@ class Pedidos extends Controlador{
             $this->vista->mesas = $this->modelo->listarMesa();
             $this->setModelo('detallepedidos');
             $this->vista->productos = $this->modelo->listarProductos();
-            $this->vista->render('pedidos/nuevo');
+            $this->vista->render('pedidos1/nuevo');
         }
         else{
             header('Location: /inicio');
@@ -105,7 +91,7 @@ class Pedidos extends Controlador{
                 $this->vista->productos = $this->modelo->listarProductos();
                 $this->vista->datosDetalle = $this->modelo->buscarIdPedido($id);
 
-                $this->vista->render('pedidos/buscarId');
+                $this->vista->render('pedidos1/buscarId');
             } catch (\Throwable $th) {
                 var_dump($th); 
             }
@@ -131,10 +117,10 @@ class Pedidos extends Controlador{
                     $buscar = 'DO';
                 }
                 $this->vista->titulo = 'Buscar pedido';
-                $this->vista->url = 'pedidos/buscar';
+                $this->vista->url = 'pedidos1/buscar';
                 $this->setModelo('pedidos');
                 $this->vista->datos = $this->modelo->listar($filtro,$buscar,1);
-                $this->vista->render('pedidos/buscar');            
+                $this->vista->render('pedidos1/buscar');            
             } catch (\Throwable $th) {
                 var_dump($th);
             }
@@ -163,25 +149,7 @@ class Pedidos extends Controlador{
             
             
             $this -> setModelo('pedidos');
-            $this -> modelo -> insert(['idmesero' => $idmesero, 'fechahora' => $fechahora, 'Estacion' => $Estacion, 'activo' => $activo, 'modalidad' => $modalidad, 'estado' => $estado]);
-            $ultimoId =  $_COOKIE['id'];
-            $this -> setModelo('detallepedidos');
-            echo "Ultimo".$ultimoId;
-            foreach($arregloDetallePedido as $item){
-                $datos=[
-                    "numeropedidos"=>$ultimoId, 
-                    "codigoproducto"=>strval($item["producto"]),
-                    "cantidad"=>strval($item["cantidad"]),
-                    "notas"=>strval($item["notas"]),
-                    "subproducto"=>strval($item["subproducto"]),
-                    "cancelado"=>$item["cancelado"],
-                    "elaborado"=>$item["elaborado"],
-                    "entregado"=>$item["entregado"],
-                    "facturado"=>$item["facturado"]
-                ];
-                $ultimoIdDetallePedido=$this->modelo->insert($datos);
-
-            }
+            $ultimoId=$this -> modelo -> insert(['idmesero' => $idmesero, 'fechahora' => $fechahora, 'Estacion' => $Estacion, 'activo' => $activo, 'modalidad' => $modalidad, 'estado' => $estado]);
 
             // $this -> modelo -> insertBulk($arregloDetallePedido,$ultimoId);
             if($modalidad == 'ME'){
@@ -206,62 +174,9 @@ class Pedidos extends Controlador{
     function actualizar(){
         try {
             
-            $id = $_GET['id'];
+            $id = $_GET['id'];          
             
-            $arregloDetallePedido = $_POST['detallePedido'];  
-            $this -> setModelo('detallepedidos');            
-            $this -> modelo -> DeleteAllNumeroPedido($id);
-            foreach($arregloDetallePedido as $item){
-                $cancelado = isset($item["cancelado"])?"1":"0";
-                $elaborado = isset($item["elaborado"])?"1":"0";
-                $entregado = isset($item["entregado"])?"1":"0";
-                $facturado = isset($item["facturado"])?"1":"0";
-                $datos=[
-                    "numeropedidos"=>$id, 
-                    "codigoproducto"=>strval($item["producto"]),
-                    "cantidad"=>strval($item["cantidad"]),
-                    "notas"=>strval($item["notas"]),
-                    "subproducto"=>strval($item["subproducto"]),
-                    "cancelado"=>$cancelado,
-                    "elaborado"=>$elaborado,
-                    "entregado"=>$entregado,
-                    "facturado"=>$facturado
-                ];
-                $ultimoIdDetallePedido=$this->modelo->insert($datos);
-                if($cancelado == "1"){
-                    $this->setModelo('pedidoscancelados');
-                    $buscarDetalle=$this->modelo->buscarId($ultimoIdDetallePedido);
-                    var_dump($buscarDetalle);
-                    if(empty($buscarDetalle)){
-                        $this -> modelo -> insert(['numeropedido' => $ultimoIdDetallePedido, 'usuario' => 1, 'fechahora'=>date("Y-m-d H:i:s")]);
-                    }
-                }else{
-                    $this->setModelo('pedidoscancelados');
-                    $this->modelo->delete($ultimoIdDetallePedido);
-                }
-                if($elaborado == "1"){
-                    $this->setModelo('pedidoselaborados');
-                    $buscarDetalle=$this->modelo->buscarId($ultimoIdDetallePedido);
-                    if(empty($buscarDetalle)){
-                        $this->modelo->insert(["iddetallepedido"=>$ultimoIdDetallePedido, "idusuario"=>1, "fechahora"=>date("Y-m-d H:i:s")]);
-                    }
-                }else{
-                    $this->setModelo('pedidoselaborados');
-                    $this->modelo->eliminar($ultimoIdDetallePedido);
-                }
-                if($entregado == "1"){
-                    $this->setModelo('entregapedido');                
-                    $buscarDetalle=$this->modelo->buscarId($ultimoIdDetallePedido);
-                    if(empty($buscarDetalle)){
-                        $this->modelo->insert(["iddetalle_pedido"=>$ultimoIdDetallePedido, "usuario"=>1, "fechahora"=>date("Y-m-d H:i:s"), "identrega"=>1]);
-                    }
-                }else{
-                    $this->setModelo('entregapedido');
-                    $this->modelo->eliminar($ultimoIdDetallePedido);
-                }
-
-            }
-            /*  
+              
             $idmesero = $_POST['idmesero'];
             $fechahora = date('Y-m-d H:i:s',time());
             $Estacion = $_POST['Estacion'];
@@ -269,7 +184,7 @@ class Pedidos extends Controlador{
             $modalidad = $_POST['modalidad'];
             $estado = $_POST['estado'];
             $this -> setModelo('pedidos');
-            $this -> modelo -> update([ 'id' => $id ,'idmesero' => $idmesero, 'fechahora' => $fechahora, 'Estacion' => $Estacion, 'activo' => $activo, 'modalidad' => $modalidad, 'estado' => $estado]); */
+            $this -> modelo -> update([ 'id' => $id ,'idmesero' => $idmesero, 'fechahora' => $fechahora, 'Estacion' => $Estacion, 'activo' => $activo, 'modalidad' => $modalidad, 'estado' => $estado]); 
             header('Location: /pedidos', true, 301);
             exit();
         } catch (\Throwable $th) {
@@ -281,31 +196,12 @@ class Pedidos extends Controlador{
         try {
             $id = $_GET['id'];
             $this->setModelo('pedidos');
-            $this->modelo->anular($id);
-            /* $this->modelo->delete($id);
-            $this -> setModelo('detallepedidos');            
-            $this -> modelo -> DeleteAllNumeroPedido($id); */
+            $this->modelo->delete($id);
             header('Location: /pedidos/',true,301);
             exit;
         } catch (\Throwable $th) {
             var_dump($th);
         }
     }
-
-    function restaurar(){
-        try {
-            $id = $_GET['id'];
-            $this->setModelo('pedidos');
-            $this->modelo->restaurar($id);
-            /* $this->modelo->delete($id);
-            $this -> setModelo('detallepedidos');            
-            $this -> modelo -> DeleteAllNumeroPedido($id); */
-            header('Location: /pedidos/anulados',true,301);
-            exit;
-        } catch (\Throwable $th) {
-            var_dump($th);
-        }
-    }
-
 
 }

@@ -26,7 +26,8 @@
                       <tr>
                         <th>N° FACTURA</th>
                         <th>N° PEDIDO</th>
-                        <th>DESCRIPCION</th>
+                        <th>DESCRIPCION</th>                        
+                        <th>ACCIONES</th>
                       </tr>
                       </thead>
                       <tbody>
@@ -36,9 +37,9 @@
                           <td><?php echo $row['NumeroPedido']; ?></td>
                           <td><?php echo $row['Nombre']; ?></td>
                           <td>
-                            <a class="btn btn-warning" href="/pedidosventas/buscarId?id=<?php echo $row['NumeroFactura']; ?>">Editar</a>
+                            <a class="btn btn-warning" href="/pedidosventas/buscarId?id=<?php echo $row['NumeroFactura']; ?>"><i class="text-white fas fa-edit"></i></a>
                             <a class="btn btn-danger" onclick = "return confirm('Estas seguro de eliminar?')"
-                             href="/pedidosventas/eliminar?id=<?php echo $row['NumeroFactura']; ?>">Eliminar</a>                            
+                             href="/pedidosventas/eliminar?id=<?php echo $row['NumeroFactura']; ?>"><i class="text-white fas fa-trash"></i></a>                            
                           </td>
                         </tr>
                         <?php  } ?>

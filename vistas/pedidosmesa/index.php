@@ -6,115 +6,65 @@
   require 'vistas/plantilla/contenidotitulo.php';
   ?>
   <!-- Main content -->
+  <!-- Main content -->
   <section class="content">
-    <div class="container-fluid">
-      <div class="row">
-        <!-- left column -->
-        <div class="col-md-12">
-          <div class="card">
-            <div class="card-header">
-              <h3 class="card-title">DataTable with default features</h3>
-            </div>
-            <!-- /.card-header -->
-            <div class="card-body">
-              <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                <div class="row">
-                  <div class="col-sm-12 col-md-6">
-                    <div class="dt-buttons btn-group flex-wrap"> <button class="btn btn-secondary buttons-copy buttons-html5" tabindex="0" aria-controls="example1" type="button"><span>Copy</span></button> <button class="btn btn-secondary buttons-csv buttons-html5" tabindex="0" aria-controls="example1" type="button"><span>CSV</span></button> <button class="btn btn-secondary buttons-excel buttons-html5" tabindex="0" aria-controls="example1" type="button"><span>Excel</span></button> <button class="btn btn-secondary buttons-pdf buttons-html5" tabindex="0" aria-controls="example1" type="button"><span>PDF</span></button> <button class="btn btn-secondary buttons-print" tabindex="0" aria-controls="example1" type="button"><span>Print</span></button>
-                      <div class="btn-group"><button class="btn btn-secondary buttons-collection dropdown-toggle buttons-colvis" tabindex="0" aria-controls="example1" type="button" aria-haspopup="true" aria-expanded="false"><span>Column visibility</span><span class="dt-down-arrow"></span></button></div>
-                    </div>
-                  </div>
-                  <div class="col-sm-12 col-md-6">
-                    <div id="example1_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="example1"></label></div>
-                  </div>
+        <div class="container-fluid">
+          <h5 class="mb-2 mt-4">Lista de Pedidos</h5>
+          <div class="row">
+            <!-- Left col -->
+            <div class="col-md-12">
+              <!-- TABLE: LATEST ORDERS -->
+              <div class="card">
+                <div class="card-header border-transparent">
+                  <h3 class="card-title">Información general de pedidos a llevar</h3>
                 </div>
-                <div class="row">
+                <!-- /.card-header -->
+                <div class="card-body p-0">
                   <div class="table-responsive">
                     <table class="table m-0">
                       <thead>
-                        <tr>
-                          <th class="sorting sorting_asc" tabindex="0">idpedido</th>
-                          <th class="sorting" tabindex="0">idmesa</th>
-                          <th class="sorting" tabindex="0">cuenta</th>
-                          <th class="sorting" tabindex="0">nombrecuenta</th>
-                        </tr>
+                      <tr>
+                        <th>ID REGISTRO</th>
+                        <th>ID PEDIDO</th>
+                        <th>NOMBRE MESA</th>
+                        <th>CUENTA</th>
+                        <th>NOMBRE CUENTA</th>                        
+                        <th>ACCIONES</th>
+                      </tr>
                       </thead>
                       <tbody>
-                        <?php
-                        foreach ($this->datos as $pedidosmesa) {
-                        ?>
-                          <tr class="odd">
-                            <td>
-                              <a href="/pedidosmesa/buscarid?id=<?php echo $pedidosmesa['idpedido']; ?>">
-                                <?php
-                                echo $pedidosmesa['idpedido'];
-
-                                ?>
-                              </a>
-                            </td>
-                            <td>
-                              <?php
-                              echo $pedidosmesa['idmesa'];
-
-                              ?>
-                            </td>
-                            <td>
-                              <?php
-                              echo $pedidosmesa['cuenta'];
-
-                              ?>
-                            </td>
-                            <td>
-                              <?php
-                              echo $pedidosmesa['nombrecuenta'];
-
-                              ?>
-                            </td>
-                            <td>
-                              <a class="btn btn-warning" href="/pedidosmesa/actualizar?id=<?php echo $pedidosmesa['idpedido']; ?>">
-                                Editar
-                              </a>
-                              <a class="btn btn-danger" href="/pedidosmesa/eliminar?id=<?php echo $pedidosmesa['idpedido']; ?>">
-                                Eliminar
-                              </a>
-                            </td>
-                          </tr>
-                        <?php
-                        }
-                        ?>
+                      <?php foreach ($this->datos as $row) { ?>
+                        <tr>
+                          <td><a href="/pedidosmesa/buscarId?id=<?php echo $row['idregistro']; ?>"><?php echo $row['idregistro']; ?></a></td>
+                          <td><?php echo $row['idpedido']; ?></td>
+                          <td><?php echo $row['Mesa']; ?></td>
+                          <td><?php echo $row['cuenta']?></td>
+                          <td><?php echo $row['nombrecuenta']?></td>
+                          <td>
+                            <a class="btn btn-warning" href="/pedidosmesa/buscarId?id=<?php echo $row['idregistro']; ?>"> <i class="text-white fas fa-edit"></i> </a>
+                            <a class="btn btn-danger" onclick = "return confirm('Estas seguro de eliminar?')"href="/pedidosmesa/eliminar?id=<?php echo $row['idregistro']; ?>"><i class="text-white fas fa-trash"></i></a>                            
+                          </td>
+                        </tr>
+                        <?php  } ?>
                       </tbody>
                     </table>
                   </div>
+                  <!-- /.table-responsive -->
                 </div>
-                <div class="row">
-                  <div class="col-sm-12 col-md-5">
-                    <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">Showing 1 to 4 of 4 entries (filtered from 57 total entries)</div>
-                  </div>
-                  <div class="col-sm-12 col-md-7">
-                    <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
-                      <ul class="pagination">
-                        <li class="paginate_button page-item previous disabled" id="example1_previous"><a href="#" aria-controls="example1" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li>
-                        <li class="paginate_button page-item active"><a href="#" aria-controls="example1" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
-                        <li class="paginate_button page-item next disabled" id="example1_next"><a href="#" aria-controls="example1" data-dt-idx="2" tabindex="0" class="page-link">Next</a></li>
-                      </ul>
-                    </div>
-                  </div>
+                <!-- /.card-body -->
+                <div class="card-footer clearfix">
+                  <a href="/pedidosmesa/nuevo" class="btn btn-sm btn-info float-left">nuevo pedido</a>
+                  <a href="/pedidosmesa/buscar" class="btn btn-sm btn-secondary float-right">Buscar pedido</a>
                 </div>
+                <!-- /.card-footer -->
               </div>
+              <!-- /.card -->
             </div>
-            <!-- /.card-body -->
+            <!-- Fin columna izquierda -->
           </div>
+          <!-- Fin primera fila -->
         </div>
-        <!--/.col (left) -->
-        <!-- right column -->
-        <div class="col-md-6">
-
-        </div>
-        <!--/.col (right) -->
-      </div>
-      <!-- /.row -->
-    </div><!-- /.container-fluid -->
-  </section>
+    </section>
   <!-- /.content -->
   <?php include 'vistas/plantilla/pie.php'; ?>
   <!-- Aqui agregar script adicionales -->

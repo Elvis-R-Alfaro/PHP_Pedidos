@@ -26,15 +26,15 @@
             <form id="quickForm" action="/pedidoselaborados/actualizar?id=<?php echo $this->datos[0]['iddetallepedido']; ?>" method="post">
               <div class="card-body">
                 <div class="form-group">
-                  <label for="inputNombre">Id Detalle Pedidos</label>
+                  <label for="inputNombre">N° Detalle Pedidos</label>
                   <input type="number" readonly name="iddetallepedido" class="form-control" value="<?php echo strval($this->datos[0]['iddetallepedido']); ?>" id="inputNombre" placeholder="Escriba el nombre del cargo" required>
                 </div>
                 <div class="form-group">
-                  <label for="textareaDescricion">Id usuario</label>
-                  <select class="form-control" name="idusuario">
+                  <label for="textareaDescricion">Usuario</label>
+                  <select class="form-control cmbbuscar select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true" name="idusuario">
                     <option value="<?php echo $this->datos[0]['idusuario'] ?>"selected disable hidden> <?php echo $this->datos[0]['loginusuario'] ?></option>
                     <?php
-                    foreach ($this->datos as $usuario) { ?>
+                    foreach ($this->usuarios as $usuario) { ?>
                       <option value=" <?php echo $usuario['idregistro'] ?>"><?php echo $usuario['loginusuario'] ?></option>
                     <?php
                     }
@@ -71,3 +71,11 @@
   <script src="/public/plugins/jquery-validation/jquery.validate.min.js"></script>
   <script src="/public/plugins/jquery-validation/additional-methods.min.js"></script>
   <?php include 'vistas/plantilla/script.php'; ?>
+
+  <script>
+
+$(document).ready(function() {
+      $('.cmbbuscar').select2();
+    });
+
+</script>

@@ -23,9 +23,10 @@
                     <table class="table m-0">
                       <thead>
                       <tr>
-                        <th>IDDETALLEPEDIDO</th>
-                        <th>IDUSUARIO</th>
+                        <th>N°DETALLEPEDIDO</th>
+                        <th>USUARIO</th>
                         <th>FECHAHORA</th>
+                        <th>ACCIONES</th>
                       </tr>
                       </thead>
                       <tbody>
@@ -37,9 +38,9 @@
                           <div class="sparkbar" data-color="#00a65a" data-height="20"><?php echo $row['fechahora']; ?></div>
                           </td>
                           <td>
-                            <a class="btn btn-warning" href="/Pedidoselaborados/editar?id=<?php echo $row['iddetallepedido']; ?>">Editar</a>
+                            <a class="btn btn-warning" href="/Pedidoselaborados/editar?id=<?php echo $row['iddetallepedido']; ?>"><i class="text-white fas fa-edit"></i></a>
                             <a class="btn btn-danger" onclick = "return confirm('Estas seguro de eliminar?')"
-                             href="/Pedidoselaborados/eliminar?id=<?php echo $row['iddetallepedido']; ?>">Eliminar</a>
+                             href="/Pedidoselaborados/eliminar?id=<?php echo $row['iddetallepedido']; ?>"><i class="text-white fas fa-trash"></i></a>
                           </td>                     
 
                         </tr>  
