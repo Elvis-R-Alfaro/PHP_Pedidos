@@ -9,11 +9,17 @@ class Pedidoscancelados extends Controlador{
         //echo "<h2>Controlador de inicio</h2>";
     }
     function inicio(){
-        $this->vista->titulo = 'Pedidos Cancelados';
-        $this->vista->url = 'pedidoscancelados';
-        $this->setModelo('pedidoscancelados');
-        $this->vista->datos=$this->modelo->select();
-        $this->vista->render('pedidoscancelados/index');
+        session_start(); 
+        if(isset($_SESSION['usuario'])){ 
+            $this->vista->titulo = 'Pedidos Cancelados';
+            $this->vista->url = 'pedidoscancelados';
+            $this->setModelo('pedidoscancelados');
+            $this->vista->datos=$this->modelo->select();
+            $this->vista->render('pedidoscancelados/index');
+        }
+        else{
+            header('Location: /inicio');
+        }
     }
     function nuevo(){
         session_start(); 

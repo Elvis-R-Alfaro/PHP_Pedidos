@@ -27,6 +27,7 @@
                       <th>USUARIO</th>
                       <th>FECHAHORA</th>
                       <th>IDENTREGA</th>
+                      <th>ACCIONES</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -39,8 +40,8 @@
                         </td>
                         <td><?php echo $row['identrega']; ?></td>
                         <td>
-                          <a class="btn btn-warning" href="/entregapedido/editar?id=<?php echo $row['iddetalle_pedido']; ?>">Editar</a>
-                          <a class="btn btn-danger" onclick="return confirm('Estas seguro de eliminar?')" href="/entregapedido/eliminar?id=<?php echo $row['iddetalle_pedido']; ?>">Eliminar</a>
+                          <a class="btn btn-warning" href="/entregapedido/editar?id=<?php echo $row['iddetalle_pedido']; ?>"><i class="text-white fas fa-edit"></i></a>
+                          <a class="btn btn-danger" onclick="return confirm('Estas seguro de eliminar?')" href="/entregapedido/eliminar?id=<?php echo $row['iddetalle_pedido']; ?>"><i class="text-white fas fa-trash"></i></a>
                         </td>
 
                       </tr>

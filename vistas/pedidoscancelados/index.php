@@ -26,7 +26,8 @@
                       <tr>
                         <th>ID PEDIDO</th>
                         <th>USUARIO</th>
-                        <th>FECHA</th>
+                        <th>FECHA</th>                        
+                        <th>ACCIONES</th>
                       </tr>
                       </thead>
                       <tbody>
@@ -36,9 +37,9 @@
                           <td><?php echo $row['LoginUsuario']; ?></td>
                           <td><?php echo $row['fechahora']; ?></td>
                           <td>
-                            <a class="btn btn-warning" href="/pedidoscancelados/buscarid?id=<?php echo $row['numeropedido']; ?>">Editar</a>
+                            <a class="btn btn-warning" href="/pedidoscancelados/buscarid?id=<?php echo $row['numeropedido']; ?>"><i class="text-white fas fa-edit"></i></a>
                             <a class="btn btn-danger" onclick = "return confirm('Estas seguro de eliminar?')"
-                             href="/pedidoscancelados/eliminar?id=<?php echo $row['numeropedido']; ?>">Eliminar</a>                            
+                             href="/pedidoscancelados/eliminar?id=<?php echo $row['numeropedido']; ?>"><i class="text-white fas fa-trash"></i></a>                            
                           </td>
                         </tr>
                         <?php  } ?>

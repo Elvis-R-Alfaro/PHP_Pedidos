@@ -35,7 +35,8 @@ include 'vistas/plantilla/encabezado.php'; ?>
                       <th>ESTACION</th>
                       <th>ESTADO</th>
                       <th>MODALIDAD</th>
-                      <th>ESTADO DEL PEDIDO</th>
+                      <th>ESTADO DEL PEDIDO</th>                      
+                      <th>ACCIONES</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -68,7 +69,7 @@ include 'vistas/plantilla/encabezado.php'; ?>
                         </td>
                         <td>
                           <a class="btn btn-warning" href="/pedidos/buscarId?id=<?php echo $row['NumeroPedido']; ?>"><i class="text-white fas fa-edit"></i></a>
-                          <a class="btn btn-danger" onclick="return confirm('Estas seguro de eliminar?')" href="/pedidos/eliminar?id=<?php echo $row['NumeroPedido']; ?>"><i class="text-white fas fa-trash"></i></a>
+                          <a class="btn btn-danger" onclick="return confirm('Estas seguro de Cancelar el pedido?')" href="/pedidos/eliminar?id=<?php echo $row['NumeroPedido']; ?>"><i class="text-white fas fa-window-close"></i></a>
                         </td>
                       </tr>
                     <?php  } ?>

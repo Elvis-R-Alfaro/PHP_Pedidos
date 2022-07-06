@@ -28,7 +28,8 @@
                         <th>ID PEDIDO</th>
                         <th>ID MESA</th>
                         <th>CUENTA</th>
-                        <th>NOMBRE CUENTA</th>
+                        <th>NOMBRE CUENTA</th>                        
+                        <th>ACCIONES</th>
                       </tr>
                       </thead>
                       <tbody>
@@ -40,9 +41,8 @@
                           <td><?php echo $row['cuenta']?></td>
                           <td><?php echo $row['nombrecuenta']?></td>
                           <td>
-                            <a class="btn btn-warning" href="/pedidosmesa/buscarId?id=<?php echo $row['idregistro']; ?>">Editar</a>
-                            <a class="btn btn-danger" onclick = "return confirm('Estas seguro de eliminar?')"
-                             href="/pedidosmesa/eliminar?id=<?php echo $row['idregistro']; ?>">Eliminar</a>                            
+                            <a class="btn btn-warning" href="/pedidosmesa/buscarId?id=<?php echo $row['idregistro']; ?>"> <i class="text-white fas fa-edit"></i> </a>
+                            <a class="btn btn-danger" onclick = "return confirm('Estas seguro de eliminar?')"href="/pedidosmesa/eliminar?id=<?php echo $row['idregistro']; ?>"><i class="text-white fas fa-trash"></i></a>                            
                           </td>
                         </tr>
                         <?php  } ?>

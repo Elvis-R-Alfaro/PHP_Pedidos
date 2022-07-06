@@ -9,20 +9,31 @@ class Pedidosmesa extends Controlador{
         //echo "<h2>Controlador de inicio</h2>";
     }
     function inicio(){
-        $this->vista->titulo = 'Pedidos Mesa';
-        $this->vista->url = 'pedidosmesa';
-        $this->setModelo('pedidosmesa');
-        $this->vista->datos=$this->modelo->listar();
-        $this->vista->render('pedidosmesa/index');
+        session_start(); 
+        if(isset($_SESSION['usuario'])){ 
+            $this->vista->titulo = 'Pedidos Mesa';
+            $this->vista->url = 'pedidosmesa';
+            $this->setModelo('pedidosmesa');
+            $this->vista->datos=$this->modelo->listar();
+            $this->vista->render('pedidosmesa/index');
+        }
+        else{
+            header('Location: /inicio');
+        }
     }
     function nuevo(){
-        session_start();
-        $this->vista->titulo = 'Nuevo Pedido Mesa';
-        $this->vista->url = 'pedidosmesa/nuevo';
-        $this->setmodelo('pedidosmesa');
-        $this->vista->pedidos = $this->modelo->listarPedidos();
-        $this->vista->mesas = $this->modelo->listarMesa();
-        $this->vista->render('pedidosmesa/nuevo');
+        session_start(); 
+        if(isset($_SESSION['usuario'])){ 
+            $this->vista->titulo = 'Nuevo Pedido Mesa';
+            $this->vista->url = 'pedidosmesa/nuevo';
+            $this->setmodelo('pedidosmesa');
+            $this->vista->pedidos = $this->modelo->listarPedidos();
+            $this->vista->mesas = $this->modelo->listarMesa();
+            $this->vista->render('pedidosmesa/nuevo');
+        }
+        else{
+            header('Location: /inicio');
+        };
     }
     function guardar(){
         try {

@@ -6,19 +6,32 @@ class DetallePedido extends Controlador{
         $this->vista->titulo = 'Detalle Pedido';
         $this->vista->url = 'detallepedido';
     }
+    
     function inicio(){
-        $this->vista->titulo = 'Detalle Pedido';
-        $this->vista->url = 'detallepedido';
-        $this->setModelo('detallepedidos');
-        $this->vista->datos = $this->modelo->listar('','',1);
-        $this->vista->render('detallepedido/index');
+        session_start(); 
+        if(isset($_SESSION['usuario'])){ 
+            $this->vista->titulo = 'Detalle Pedido';
+            $this->vista->url = 'detallepedido';
+            $this->setModelo('detallepedidos');
+            $this->vista->datos = $this->modelo->listar('','',1);
+            $this->vista->render('detallepedido/index');
+        }
+        else{
+            header('Location: /inicio');
+        }
     }
     function nuevo(){
-        $this->vista->titulo = 'Nuevo Detalle Pedido';
-        $this->vista->url = 'detallepedido/nuevo';
-        $this->setModelo('detallepedidos');
-        $this->vista->productos = $this->modelo->listarProductos();
-        $this->vista->render('detallepedido/nuevo');
+        session_start(); 
+        if(isset($_SESSION['usuario'])){ 
+            $this->vista->titulo = 'Nuevo Detalle Pedido';
+            $this->vista->url = 'detallepedido/nuevo';
+            $this->setModelo('detallepedidos');
+            $this->vista->productos = $this->modelo->listarProductos();
+            $this->vista->render('detallepedido/nuevo');
+        }
+        else{
+            header('Location: /inicio');
+        }
     }
 
     function buscar(){
@@ -88,27 +101,39 @@ class DetallePedido extends Controlador{
     }
 
     function buscarId() {
-        try {
-            $idregisto = $_GET['id'];
-            
-            $this->setModelo('detallepedidos');
-            $this->vista->datos = $this->modelo->buscarId($idregisto);
-            $this->vista->render('detallepedido/buscarId');
-        } catch (\Throwable $th) {
-            //throw $th;
+        session_start(); 
+        if(isset($_SESSION['usuario'])){ 
+            try {
+                $idregisto = $_GET['id'];
+                
+                $this->setModelo('detallepedidos');
+                $this->vista->datos = $this->modelo->buscarId($idregisto);
+                $this->vista->render('detallepedido/buscarId');
+            } catch (\Throwable $th) {
+                //throw $th;
+            }
+        }
+        else{
+            header('Location: /inicio');
         }
     }
 
     function editar() {
-        try {
-            $idregisto = $_GET['id'];
-            $this->setModelo('detallepedidos');
-            $this->vista->datos = $this->modelo->buscarId($idregisto);            
-            $this->vista->productos = $this->modelo->listarProductos();
-            $this->vista->render('detallepedido/editar');
-            exit;
-        } catch (\Throwable $th) {
-            var_dump($th);
+        session_start(); 
+        if(isset($_SESSION['usuario'])){ 
+            try {
+                $idregisto = $_GET['id'];
+                $this->setModelo('detallepedidos');
+                $this->vista->datos = $this->modelo->buscarId($idregisto);            
+                $this->vista->productos = $this->modelo->listarProductos();
+                $this->vista->render('detallepedido/editar');
+                exit;
+            } catch (\Throwable $th) {
+                var_dump($th);
+            }
+        }
+        else{
+            header('Location: /inicio');
         }
     }
 
