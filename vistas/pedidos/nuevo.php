@@ -22,10 +22,11 @@
             <!-- form start -->
             <form id="quickForm" action="/pedidos/guardar/" method="post">
               <div class="card-body">
-                <div class="form-row">
+                <div class="row">
                   <div class="form-group col-md-6">
                     <label for="idmesero">Mesero</label>
                     <select class="form-control" id="idmesero" name="idmesero" placeholder="Id mesero">
+                      <option value="" selected disabled hidden>Seleccione un valor</option>
                       <?php
                       foreach ($this->datos as $mesero) { ?>
                         <option value=" <?php echo $mesero['idmesero'] ?>"><?php echo $mesero['nombre'] ?></option>
@@ -37,6 +38,7 @@
                   <div class="form-group col-md-6">
                     <label for="Estacion">Estacion</label>
                     <select class="form-control" id="Estacion" name="Estacion" placeholder="Estacion">
+                      <option value="" selected disabled hidden>Seleccione un valor</option>
                       <?php
                       foreach ($this->estaciones as $estacion) { ?>
                         <option value=" <?php echo $estacion['NumeroEstacion'] ?>"><?php echo $estacion['nombre'] ?></option>
@@ -45,11 +47,10 @@
                       ?>
                     </select>
                   </div>
-                </div>
-                <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="modalidad">Modalidad</label>
                     <select class="form-control" id="modalidad" name="modalidad" placeholder="Modalidad">
+                      <option value="" selected disabled hidden>Seleccione un valor</option>
                       <option value="LL">Llevar</option>
                       <option value="DO">Domicilio</option>
                       <option value="ME">Mesa</option>
@@ -58,24 +59,25 @@
                   <div class="form-group col-md-6">
                     <label for="activo">Estado</label>
                     <select class="form-control" id="activo" name="activo" placeholder="Activo">
-                      <option value="1" default>Activo</option>
-                      <option value="0">Inactivo</option>
+                      <option value="1" default>Pendiente</option>
+                      <option value="0">Finalizado</option>
                     </select>
                   </div>
-                </div>
-                <div class="form-row">
-                  <div class="form-group col-md-12">
+                  <div id="field_wrapper" class="col-md-12">
+                  <!-- <div class="form-group col-md-6"><label>Cliente</label><select class="form-control cmbbuscar select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true"><option value="" selected disabled hidden>Seleccione un valor</option><?php foreach ($this->clientes as $cliente) { ?> <option value=" <?php echo $cliente['idcliente'] ?>"><?php echo $cliente['nombre'] ?></option><?php } ?> </select></div>                     -->
+                  </div>
+                  <div class="form-group col-md-6">
                     <label for="fechahora">Estado del Pedido</label>
-                    <div class="form-group">
-                      <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
+                    <div class="row">
+                      <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success mr-4 ml-2">
                         <input type="checkbox" class="custom-control-input" id="elaborado" name="elaborado" value="1" checked control-id="ControlID-43">
                         <label class="custom-control-label" for="elaborado">Elaborado</label>
                       </div>
-                      <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
+                      <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success mr-4">
                         <input type="checkbox" class="custom-control-input" id="entregado" name="entregado" value="1" checked control-id="ControlID-43">
                         <label class="custom-control-label" for="entregado">Entregado</label>
                       </div>
-                      <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
+                      <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success mr-4">
                         <input type="checkbox" class="custom-control-input" id="facturado" name="facturado" value="1" checked control-id="ControlID-43">
                         <label class="custom-control-label" for="facturado">Facturado</label>
                       </div>
@@ -95,20 +97,6 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr id="1" >
-                        <td><input type="text" name="producto" class="form-control" placeholder="Escriba el nombre del producto" required></td>
-                        <td><input type="number" step="1" name="cantidad" class="form-control" placeholder="Escriba el nombre del producto" required></td>
-                        <td><input type="text" name="subproducto" class="form-control" placeholder="Escriba el nombre del producto" required></td>
-                        <td><input type="text" name="notas" class="form-control" placeholder="Escriba el nombre del producto" required></td>                        
-                        <td><button type="button" onclick="EliminarFila(1)">A</button></td>
-                      </tr>
-                      <tr id="2" >
-                        <td><input type="text" name="producto" class="form-control" placeholder="Escriba el nombre del producto" required></td>
-                        <td><input type="number" step="1" name="cantidad" class="form-control" placeholder="Escriba el nombre del producto" required></td>
-                        <td><input type="text" name="subproducto" class="form-control" placeholder="Escriba el nombre del producto" required></td>
-                        <td><input type="text" name="notas" class="form-control" placeholder="Escriba el nombre del producto" required></td>                        
-                        <td><button type="button" onclick="EliminarFila(2)">A</button></td>
-                      </tr>
                     </tbody>
                   </table>
                 </div>
@@ -139,11 +127,44 @@
   <?php include 'vistas/plantilla/script.php'; ?>
 
   <script>
-    function AgregarFila(){
-      $('#detallePedido > tbody:last-child').append('<tr<p>Hola</p>tr><tr<p>Hola</p>tr>');
+    var conteoDetallePedidos = 0
+
+    function AgregarFila() {
+      $('#detallePedido > tbody:last-child')
+        .append('<tr id="2" ><td><input type="text" name="detallePedido[' + conteoDetallePedidos + '][producto]" class="form-control" placeholder="Escriba el nombre del producto" required></td><td><input type="number" step="1" name="detallePedido[' + conteoDetallePedidos + '][cantidad]" class="form-control" placeholder="Escriba la cantidad" required></td><td><input type="number" name="detallePedido[' + conteoDetallePedidos + '][subproducto]" class="form-control" placeholder="Escriba el nombre del subproducto" required></td><td><input type="text" name="detallePedido[' + conteoDetallePedidos + '][notas]" class="form-control" placeholder="Escriba notas" required></td><td><button type="button" onclick="EliminarFila(2)">A</button></td></tr>');
+      conteoDetallePedidos++
     }
-    
-    function EliminarFila(id){
-      $('#'+id).remove();
+
+    function EliminarFila(id) {
+      $('#' + id).remove();
     }
+
+    $(document).ready(function() {
+      
+    });
+
+
+
+    $(document).ready(function() {
+      var cmbModalidad = document.getElementById('modalidad'); //Add button selector
+      var wrapper = $('#field_wrapper'); //Input field wrapper
+      var fieldHTML = '<div id="mesa" class="col-md-12 row"><div class="form-group col-md-6" data-select2-id="63"><label>Cliente</label><select class="form-control cmbbuscar select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true"><option value="" selected disabled hidden>Seleccione un valor</option><?php foreach ($this->clientes as $cliente) { ?> <option value=" <?php echo $cliente['idcliente'] ?>"><?php echo $cliente['nombre'] ?></option><?php } ?> </select></div><div class="form-group col-md-6" id="idmesa"><label for="activo">Mesa</label><select class="form-control" id="activo" name="activo" placeholder="Activo"><option value="1" default>Activo</option><option value="0">Inactivo</option></select></div><div class="form-group col-md-6"><label for="idpedido">Cuenta</label><input type="text" class="form-control" id="cuenta" name="cuenta" placeholder="Cuenta" required></div><div class="form-group col-md-6"><label for="idcliente">Nombre de la Cuenta</label><input type="text" class="form-control" id="idcliente" name="nombrecuenta" placeholder="Nombre de la cuenta" required></div></div>'; //New input field html 
+      var x = 1;
+      var max = 1;
+
+      //Once add button is clicked
+      $(cmbModalidad).change(function() {
+        var cmbModalidadValor = cmbModalidad.options[cmbModalidad.selectedIndex].text; //Get initial value
+        console.log(cmbModalidadValor);
+        if (cmbModalidadValor == 'Mesa' && max <= 1) {
+          x++;
+          console.log("hola2");
+          $(wrapper).append(fieldHTML);          
+          $('.cmbbuscar').select2();
+        } else {
+          x == 0;
+          $('#mesa').remove();
+        } //Add field html
+      });
+    });
   </script>

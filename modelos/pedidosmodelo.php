@@ -6,8 +6,25 @@ class PedidosModelo extends Modelo{
     }
 
     public function insert($datos){
-        $query = $this-> db-> conectar()-> prepare('INSERT INTO pedidos(idmesero, fechahora, Estacion, activo, modalidad, estado) VALUES (:idmesero, :fechahora, :Estacion, :activo, :modalidad, :estado)');
-        $query->execute($datos);
+        try {
+            $opciones = [
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_EMULATE_PREPARES => false,
+            ];
+            $pdo = new PDO("mysql:host=localhost;dbname=sigresdesarrollo;charset=utf8", "root", "", $opciones);
+            
+            $query = $pdo->prepare('INSERT INTO pedidos(idmesero, fechahora, Estacion, activo, modalidad, estado) VALUES (:idmesero, :fechahora, :Estacion, :activo, :modalidad, :estado)');
+            $query->execute($datos);
+            $id = $pdo->lastInsertId();
+            
+            return $id;
+            //code...
+        } catch (\Throwable $th) {
+            return $th;
+        }
+        //return last id
+
+        
     }
 
     public function update($datos){
@@ -28,13 +45,13 @@ class PedidosModelo extends Modelo{
                 $sql = 'SELECT pedidos.*,meseros.nombre AS nombremesero,estaciones.nombre AS nombreestacion FROM pedidos 
                 JOIN meseros ON pedidos.idmesero = meseros.idmesero 
                 JOIN estaciones on pedidos.Estacion = estaciones.NumeroEstacion 
-                WHERE pedidos.activo = '.$estado;
+                WHERE pedidos.estado != "AAA"';
             }
             else{
                 $sql = 'SELECT pedidos.*,meseros.nombre AS nombremesero, estaciones.nombre AS nombreestacion FROM pedidos
                 INNER JOIN meseros ON pedidos.idmesero = meseros.idmesero
                 INNER JOIN estaciones ON pedidos.Estacion = estaciones.NumeroEstacion
-                WHERE '.$filtro .' LIKE "%'.$buscar.'%" AND pedidos.activo = '.$estado;
+                WHERE '.$filtro .' LIKE "%'.$buscar.'%" AND pedidos.estado != AAA';
             }
             
             $query = $this->db->conectar()->query($sql);
@@ -72,10 +89,10 @@ class PedidosModelo extends Modelo{
                 }
                 // isset($pedido['activo'])? 'Activo':'Inactivo';
                 if($pedido['activo'] == '1'){
-                    $pedido['activo'] = 'Activo';
+                    $pedido['activo'] = 'Pendiente';
                 }
                 else{
-                    $pedido['activo'] = 'Inactivo';
+                    $pedido['activo'] = 'Finalizado';
                 }
                 if($pedido['modalidad'] == 'DO'){
                     $pedido['modalidad'] = 'Domicilio';
@@ -112,6 +129,25 @@ class PedidosModelo extends Modelo{
             var_dump($th);
         }
     }
+
+    public function listarClientes(){
+        $lista=[];
+        try {
+            $sql = 'SELECT * FROM clientes';
+            $query = $this->db->conectar()->query($sql);
+            foreach ($query as $row) {
+                $mesero =[
+                    'idcliente' => $row['idcliente'],
+                    'nombre' => $row['nombre']
+                ];
+                array_push($lista,$mesero);
+            }
+            return $lista;
+        } catch (\Throwable $th) {
+            var_dump($th);
+        }
+    }
+
 
     public function listarEstaciones(){
         $lista=[];

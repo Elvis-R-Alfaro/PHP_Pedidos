@@ -4,8 +4,23 @@ class detallepedidosModelo extends Modelo{
         parent::__construct();
     }
     public function insert($datos){
-        $query = $this->db->conectar()->prepare("INSERT INTO detalle_pedido (NumeroPedidos, CodigoProducto,Cantidad,Notas,subproducto,Cancelado,Elaborado,Entregado,Facturado) VALUES (:numeropedidos, :codigoproducto, :cantidad, :notas, :subproducto, :cancelado, :elaborado, :entregado, :facturado)");
+        $query = $this->db->conectar()->prepare("INSERT INTO detalle_pedido (NumeroPedido, CodigoProducto,Cantidad,Notas,subproducto,Cancelado,Elaborado,Entregado,Facturado) VALUES (:numeropedidos, :codigoproducto, :cantidad, :notas, :subproducto, :cancelado, :elaborado, :entregado, :facturado)");
         $query->execute($datos);
+    }
+    public function insertBulk($arregloDetallePedido,$ultimoId){
+
+        foreach($arregloDetallePedido as $item){
+            $datos=[
+                "numeropedidos"=>$ultimoId, 
+                "codigoproducto"=>strval($item["producto"]),
+                "cantidad"=>strval($item["cantidad"]),
+                "notas"=>strval($item["notas"]),
+                "subproducto"=>strval($item["subproducto"])
+            ];
+            $query = $this->db->conectar()->prepare("INSERT INTO detalle_pedido (NumeroPedido, CodigoProducto,Cantidad,Notas,subproducto) VALUES (:numeropedidos, :codigoproducto, :cantidad, :notas, :subproducto)");
+            $query->execute($datos);
+        }
+        
     }
 
     public function listar(){
@@ -16,7 +31,7 @@ class detallepedidosModelo extends Modelo{
             foreach ($query as $row) {
                 $detallepedido =[
                     'idregistro' => $row['idregistro'],
-                    'NumeroPedidos' => $row['NumeroPedidos'],
+                    'NumeroPedidos' => $row['NumeroPedido'],
                     'CodigoProducto' => $row['CodigoProducto'],
                     'Cantidad' => $row['Cantidad'],
                     'Notas' => $row['Notas'],
