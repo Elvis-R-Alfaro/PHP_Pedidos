@@ -26,7 +26,7 @@
                       <tr>
                         <th>ID REGISTRO</th>
                         <th>ID PEDIDO</th>
-                        <th>ID MESA</th>
+                        <th>NOMBRE MESA</th>
                         <th>CUENTA</th>
                         <th>NOMBRE CUENTA</th>
                       </tr>

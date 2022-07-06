@@ -14,7 +14,8 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="/public/css/adminlte.min.css">
   <link rel="stylesheet" href="/public/plugins/bootstrap-switch/css/bootstrap3/bootstrap-switch.css"> 
-  <link rel="stylesheet" href="/public/plugins/bootstrap-switch/css/bootstrap2/bootstrap-switch.css"> 
+  <link rel="stylesheet" href="/public/plugins/bootstrap-switch/css/bootstrap2/bootstrap-switch.css">
+  <link rel="stylesheet" href="/public/plugins/select2/css/select2.min.css">
 </head>
 <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
     

@@ -25,7 +25,8 @@
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="idpedido">Id Pedido</label>
-                    <select class="form-control" id="idpedido" name="idpedido">
+                    <select class="form-control cmbbuscar select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true" name="idpedido" required>
+                   <!-- <select class="form-control" id="idpedido" name="idpedido">  -->
                     <option value="" selected disabled hidden>Seleccione un valor</option>
 
                       <?php
@@ -38,8 +39,10 @@
                   </div>
                   
                   <div class="form-group col-md-6">
-                    <label for="idcliente">Id Mesa</label>
-                    <select class="form-control" id="idmesa" name="idmesa">
+                    <label for="idcliente">Nombre Mesa</label>
+                    <select class="form-control cmbbuscar select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="2" tabindex="-1" aria-hidden="true" name="idmesa" required>
+                   
+                    <!--<select class="form-control" id="idmesa" name="idmesa"> -->
                     <option value="" selected disabled hidden>Seleccione un valor</option>
                       <?php
                       foreach ($this->mesas as $mesa) { ?>
@@ -87,3 +90,18 @@
   <script src="/public/plugins/jquery-validation/jquery.validate.min.js"></script>
   <script src="/public/plugins/jquery-validation/additional-methods.min.js"></script>
   <?php include 'vistas/plantilla/script.php'; ?>
+
+
+<script>
+
+$(document).ready(function() {
+      $('.cmbbuscar').select2();
+    });
+
+    /*
+    $(document).ready(function() {
+      $('.cmbbuscar2').select2();
+    });
+    */
+
+</script>
