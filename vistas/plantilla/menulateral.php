@@ -118,7 +118,7 @@
           </li>
           <li class="nav-item">
             <a href="/" class="nav-link">
-              <i class="nav-icon fas fa-box"></i>
+              <i class="nav-icon fas fa-boxes"></i>
               <p>
                 Pedidos Detalle
                 <i class="fas fa-angle-left right"></i>
@@ -147,7 +147,7 @@
           </li>
           <li class="nav-item">
             <a href="/" class="nav-link">
-              <i class="nav-icon fas fa-box"></i>
+              <i class="nav-icon fas fa-hand-holding"></i>
               <p>
                 Pedidos Llevar
                 <i class="fas fa-angle-left right"></i>
@@ -176,7 +176,7 @@
           </li>
           <li class="nav-item">
             <a href="/" class="nav-link">
-              <i class="nav-icon fas fa-box"></i>
+              <i class="nav-icon fas fa-cash-register"></i>
               <p>
                 Pedidos Ventas
                 <i class="fas fa-angle-left right"></i>
@@ -205,7 +205,7 @@
           </li>
           <li class="nav-item">
             <a href="/" class="nav-link">
-              <i class="nav-icon fas fa-box"></i>
+              <i class="nav-icon fas fa-window-close"></i>
               <p>
                 Pedidos Cancelados
                 <i class="fas fa-angle-left right"></i>
@@ -234,7 +234,7 @@
           </li>
           <li class="nav-item">
             <a href="/" class="nav-link">
-              <i class="nav-icon fas fa-box"></i>
+              <i class="nav-icon fas fa-check"></i>
               <p>
                 Pedidos Elaborados
                 <i class="fas fa-angle-left right"></i>

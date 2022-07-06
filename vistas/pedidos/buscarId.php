@@ -84,7 +84,9 @@
                     </div>
                   </div>
                 </div>
-                <button type="button" onclick="AgregarFila()">A</button>
+                <label for="">Agregar Fila</label>
+                <button type="button" class="btn btn-success" onclick="AgregarFila()"><i class="text-white fas fa-plus-square"></i></button>
+                
                 <div class="table-responsive">
                   <table id="detallePedido" class="table m-0">
                     <thead>

@@ -126,13 +126,13 @@ class PedidosModelo extends Modelo{
                 $sql = 'SELECT pedidos.*,meseros.nombre AS nombremesero,estaciones.nombre AS nombreestacion FROM pedidos 
                 JOIN meseros ON pedidos.idmesero = meseros.idmesero 
                 JOIN estaciones on pedidos.Estacion = estaciones.NumeroEstacion 
-                WHERE pedidos.estado != "AAA" order by pedidos.NumeroPedido asc';
+                WHERE pedidos.estado != "AAA" order by pedidos.NumeroPedido desc';
             }
             else{
                 $sql = 'SELECT pedidos.*,meseros.nombre AS nombremesero, estaciones.nombre AS nombreestacion FROM pedidos
                 INNER JOIN meseros ON pedidos.idmesero = meseros.idmesero
                 INNER JOIN estaciones ON pedidos.Estacion = estaciones.NumeroEstacion
-                WHERE '.$filtro .' LIKE "%'.$buscar.'%" AND pedidos.estado != AAA';
+                WHERE '.$filtro .' LIKE "%'.$buscar.'%"';
             }
             
             $query = $this->db->conectar()->query($sql);
