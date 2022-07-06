@@ -11,7 +11,7 @@
 
     <section class="content-header">
         <div class="container-fluid">
-            <h2 class="text-center display-4">Buscar</h2>
+            <h4 class="text-center display-4">Busqueda de pedido llevar</h4>
         </div>
     </section>
 
