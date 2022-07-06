@@ -16,33 +16,34 @@
           <!-- jquery validation -->
           <div class="card card-primary">
             <div class="card-header">
-              <h3 class="card-title">Datos generales <small>Pedidos y ventas</small></h3>
+              <h3 class="card-title">Datos generales <small>Pedidos y Ventas</small></h3>
             </div>
             <!-- /.card-header -->
             <!-- form start -->
-            <form id="quickForm" action="/pedidosventas/guardar/" method="post">
+            <form id="quickForm" action="/pedidosventas/actualizar?id=<?php echo $this->datos[0]['id'] ?>" method="post">
               <div class="card-body">
                 <div class="form-row">
                   <div class="form-group col-md-6">
-                  <label for="NumeroPedido">Pedido</label>
+                    <label for="NumeroPedido"> Numero pedido</label>
+
                     <select class="form-control" id="NumeroPedido" name="NumeroPedido" required>
-                    <option value="" selected disabled hidden>Seleccione un valor</option>
+                      <option value=" <?php echo $this->datos[0]['NumeroPedido'] ?>" selected disabled hidden><?php echo $this->datos[0]['NumeroPedido'] ?></option>
                       <?php
-                      foreach ($this->facturas as $facturas) { ?>
-                        <option value="<?php echo $facturas['NumeroPedido'] ?>"><?php echo $facturas['Nombre'] ?></option>
+                      foreach ($this->facturas as $pedido) { ?>
+                        <option value=" <?php echo $pedido['NumeroPedido'] ?>"><?php echo $pedido['NumeroPedido'] ?></option>
                       <?php
                       }
                       ?>
                     </select>
                   </div>
                   <div class="form-group col-md-6">
-                  
+                  <label for="Nombre">Descripcion</label>
+                   <input type="text" value="<?php echo $this->facturas[0]['Nombre'] ?>" class="form-control" id="Nombre">
                   </div>
                 </div>
-
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary toastrDefaultSuccess">Guardar</button>
+                  <button type="submit" class="btn btn-primary toastrDefaultSuccess">Actualizar</button>
                 </div>
             </form>
           </div>
