@@ -82,6 +82,7 @@ class Pedidoselaborados extends Controlador{
                 $id = $_GET['id'];
                 $this->setModelo('pedidoselaborados');
                 $this->vista->datos = $this->modelo->buscarID($id);
+                $this->vista->usuarios = $this->modelo->listarusuarios();
                 $this->vista->render('Pedidoselaborados/editar');
             } catch (\Throwable $th) {
                 var_dump($th);

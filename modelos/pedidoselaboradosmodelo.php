@@ -31,7 +31,7 @@ class pedidoselaboradosModelo extends Modelo{
 
     public function buscarID($id){
         $lista=[];
-        try{
+        try{ 
             $sql='select pedidos_elaborados.*,usuarios.LoginUsuario from pedidos_elaborados JOIN usuarios ON usuarios.idregistro = pedidos_elaborados.idusuario where iddetallepedido ='. $id;
             $query = $this->db->conectar()->query($sql);
             foreach($query as $row){
