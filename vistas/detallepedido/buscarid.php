@@ -1,9 +1,9 @@
 <?php include 'vistas/plantilla/encabezado.php'; ?>
 <div class="wrapper">
     <?php
-        require 'vistas/plantilla/nav.php';
-        require 'vistas/plantilla/menulateral.php';
-        require 'vistas/plantilla/contenidotitulo.php';
+    require 'vistas/plantilla/nav.php';
+    require 'vistas/plantilla/menulateral.php';
+    require 'vistas/plantilla/contenidotitulo.php';
     ?>
     <!-- Main content -->
     <section class="content">
@@ -18,48 +18,50 @@
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form id="quickForm">
+                        <form id="quickForm" method="post">
                             <div class="card-body row">
                                 <div class="form-group col-md-6">
                                     <label for="inputNombre">Numero Pedido</label>
-                                    <input type="number" readonly value="<?php echo $this->datos[0]['NumeroPedidos'] ?>" class="form-control" id="inputNombre" placeholder="Escriba el nombre del cargo" required>
+                                    <input type="number" readonly name="numeropedidos" value="<?php echo $this->datos[0]['NumeroPedido'] ?>" class="form-control" placeholder="Escriba el numero pedido" required>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="inputNombre">Codigo Producto</label>
-                                    <input type="text" readonly value="<?php echo $this->datos[0]['CodigoProducto'] ?>" class="form-control" id="inputNombre" placeholder="Escriba el nombre del cargo" required>
+                                    <label>Producto</label>
+                                        <input class="form-control" value="<?php echo $this->datos[0]['NombreProducto'] ?>">
+                                    
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="inputNombre">Cantidad</label>
-                                    <input type="text" readonly value="<?php echo $this->datos[0]['Cantidad'] ?>" class="form-control" id="inputNombre" placeholder="Escriba el nombre del cargo" required>
+                                    <input type="number" readonly min="0" step="1" name="cantidad" value="<?php echo $this->datos[0]['Cantidad'] ?>" class="form-control" placeholder="Escriba la cantidad" required>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="inputNombre">subproducto</label>
-                                    <input type="text" readonly value="<?php echo $this->datos[0]['subproducto'] ?>" class="form-control" id="inputNombre" placeholder="Escriba el nombre del cargo" required>
+                                    <label>SubProducto</label>
+                                    <input class="form-control" value="<?php echo $this->datos[0]['NombreSubproducto'] ?>">
                                 </div>
                                 <div class="form-group col-md-12">
                                     <label for="inputNombre">Notas</label>
-                                    <input type="text" readonly value="<?php echo $this->datos[0]['Notas'] ?>" class="form-control" id="inputNombre" placeholder="Escriba el nombre del cargo" required>
+                                    <input readonly type="text" name="notas" value="<?php echo $this->datos[0]['Notas'] ?>" class="form-control" placeholder="Escriba notas">
                                 </div>
-                                <div class="form-group col-md-3">
-                                    <label for="inputNombre">Cancelado</label>
-                                    <input type="number" step="1" readonly value="<?php echo $this->datos[0]['Cancelado'] ?>" class="form-control" id="inputNombre" placeholder="Escriba el nombre del cargo" required>
+                                <div class="col-md-3 text-center custom-control custom-switch custom-switch-off-danger custom-switch-on-success ">
+                                    <input type="checkbox" class="custom-control-input" name="cancelado" id="" value="<?php echo $this->datos[0]['Cancelado']; ?>" <?php $checked = $this->datos[0]['Cancelado'] ?  "checked" : "";
+                                                                                                                                                                            echo $checked ?> control-id="ControlID-43">
+                                    <label class="custom-control-label" for="cancelado" id="">Cancelado</label>
                                 </div>
-                                <div class="form-group col-md-3">
-                                    <label for="inputNombre">Elaborado</label>
-                                    <input type="number" step="1" readonly value="<?php echo $this->datos[0]['Elaborado'] ?>" class="form-control" id="inputNombre" placeholder="Escriba el nombre del cargo" required>
+                                <div class="col-md-3 text-center custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
+                                    <input readonly type="checkbox" class="custom-control-input" name="elaborado" id="" value="<?php echo $this->datos[0]['Elaborado'] ?>" <?php $checked = $this->datos[0]['Elaborado'] ?  "checked" : ""; echo $checked ?> control-id="ControlID-43">
+                                    <label class="custom-control-label" for="elaborado" id="">Elaborado</label>
                                 </div>
-                                <div class="form-group col-md-3">
-                                    <label for="inputNombre">Entregado</label>
-                                    <input type="number" step="1" readonly value="<?php echo $this->datos[0]['Entregado'] ?>" class="form-control" id="inputNombre" placeholder="Escriba el nombre del cargo" required>
+                                <div class="col-md-3 text-center custom-control custom-switch custom-switch-off-danger custom-switch-on-success ">
+                                    <input readonly type="checkbox" class="custom-control-input" name="entregado" id="" value="<?php echo $this->datos[0]['Entregado'] ?>" <?php $checked = $this->datos[0]['Entregado'] ?  "checked" : "";
+                                                                                                                                                                            echo $checked ?> control-id="ControlID-43">
+                                    <label  class="custom-control-label" for="entregado" id="">Entregado</label>
                                 </div>
-                                <div class="form-group col-md-3">
-                                    <label for="inputNombre">Facturado</label>
-                                    <input type="number" step="1" readonly value="<?php echo $this->datos[0]['Facturado'] ?>" class="form-control" id="inputNombre" placeholder="Escriba el nombre del cargo" required>
+                                <div class="col-md-3 text-center custom-control custom-switch custom-switch-off-danger custom-switch-on-success ">
+                                    <input readonly type="checkbox" class="custom-control-input" name="" id="" value="<?php echo $this->datos[0]['Facturado'] ?>" <?php $checked = $this->datos[0]['Facturado'] ?  "checked" : "";
+                                                                                                                                                                            echo $checked ?> control-id="ControlID-43">
+                                    <label class="custom-control-label" for="facturado" id="">Facturado</label>
                                 </div>
                             </div>
                             <!-- /.card-body -->
-                            <div class="card-footer">
-                            </div>
                         </form>
                     </div>
                     <!-- /.card -->
@@ -81,3 +83,10 @@
     <script src="/public/plugins/jquery-validation/jquery.validate.min.js"></script>
     <script src="/public/plugins/jquery-validation/additional-methods.min.js"></script>
     <?php include 'vistas/plantilla/script.php'; ?>
+
+    <script>
+        $(document).ready(function() {
+            $('.cmbBuscarProducto').select2();
+            $('.cmbBuscarSubProducto').select2();
+        });
+    </script>

@@ -132,7 +132,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="../UI/icons.html" class="nav-link">
+                <a href="/detallepedido/buscar" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Buscar</p>
                 </a>
@@ -161,7 +161,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="../pedidosllevar/buscar" class="nav-link">
+                <a href="/pedidosllevar/buscar" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Buscar</p>
                 </a>
@@ -219,7 +219,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="../UI/icons.html" class="nav-link">
+                <a href="/pedidoscancelados/buscar" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Buscar</p>
                 </a>
@@ -248,7 +248,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="../UI/icons.html" class="nav-link">
+                <a href="/Pedidoselaborados/buscar" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Buscar</p>
                 </a>
@@ -277,13 +277,42 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="../UI/icons.html" class="nav-link">
+                <a href="/pedidosmesa/buscar" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Buscar</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/pedidosmesa/nuevo" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Nuevo</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="/" class="nav-link">
+              <i class="nav-icon fas fa-box"></i>
+              <p>
+                Pedidos Entregados
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview" style="display: none;">
+              <li class="nav-item">
+                <a href="/entregapedido" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Listar</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/entregapedido/buscar" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Buscar</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/entregapedido/nuevo" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Nuevo</p>
                 </a>

@@ -56,8 +56,7 @@
                                     <label class="custom-control-label" for="cancelado" id="cancelado">Cancelado</label>
                                 </div>
                                 <div class="col-md-3 text-center custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
-                                    <input type="checkbox" class="custom-control-input" name="elaborado" id="elaborado" value="<?php echo $this->datos[0]['Elaborado'] ?>" <?php $checked = $this->datos[0]['Elaborado'] ?  "checked" : "";
-                                                                                                                                                                            echo $checked ?> control-id="ControlID-43">
+                                    <input type="checkbox" class="custom-control-input" name="elaborado" id="elaborado" value="<?php echo $this->datos[0]['Elaborado'] ?>" <?php $checked = $this->datos[0]['Elaborado'] ?  "checked" : ""; echo $checked ?> control-id="ControlID-43">
                                     <label class="custom-control-label" for="elaborado" id="elaborado">Elaborado</label>
                                 </div>
                                 <div class="col-md-3 text-center custom-control custom-switch custom-switch-off-danger custom-switch-on-success ">

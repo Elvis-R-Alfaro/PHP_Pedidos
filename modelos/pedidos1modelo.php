@@ -1,6 +1,6 @@
 <?php 
 
-class PedidosModelo extends Modelo{
+class Pedidos1Modelo extends Modelo{
     function __construct(){
         parent::__construct();
     }
@@ -17,9 +17,7 @@ class PedidosModelo extends Modelo{
             $query->execute($datos);
             $id = $pdo->lastInsertId();
             
-             //tiempo de expiración de la cookie en 30 días
-            $_COOKIE["id"] = $id;
-            //return $id;
+            return $id;
             //code...
         } catch (\Throwable $th) {
             return $th;
@@ -34,89 +32,10 @@ class PedidosModelo extends Modelo{
         $query->execute($datos);
     }
 
-    public function anular($id){
-        $sql = 'UPDATE pedidos set estado= "AAA" WHERE NumeroPedido = '.$id;
-        $query = $this->db->conectar()->query($sql);
-        $query->execute();
-    }
-
-    public function restaurar($id){
-        $sql = 'UPDATE pedidos set estado = "NNN" WHERE NumeroPedido = '.$id;
-        $query = $this->db->conectar()->query($sql);
-        $query->execute();
-    }
-    
     public function delete($id){
         $sql = 'DELETE FROM pedidos WHERE NumeroPedido = '.$id;
         $query = $this->db->conectar()->query($sql);
         $query->execute();
-    }
-
-    public function listarAnulados(){
-        $lista=[];
-        try {            
-                $sql = 'SELECT pedidos.*,meseros.nombre AS nombremesero,estaciones.nombre AS nombreestacion FROM pedidos 
-                JOIN meseros ON pedidos.idmesero = meseros.idmesero 
-                JOIN estaciones on pedidos.Estacion = estaciones.NumeroEstacion 
-                WHERE pedidos.estado = "AAA" order by pedidos.NumeroPedido asc';
-
-            
-            $query = $this->db->conectar()->query($sql);
-            foreach ($query as $row) {
-                $pedido =[
-                    'NumeroPedido' => $row['NumeroPedido'],
-                    'idmesero' => $row['idmesero'],
-                    'fechahora' => $row['fechahora'],
-                    'Estacion' => $row['Estacion'],
-                    'activo' => $row['activo'],
-                    'modalidad' => $row['modalidad'],
-                    'estado' => $row['estado'],
-                    'nombremesero' => $row['nombremesero'],
-                    'nombreestacion' => $row['nombreestacion'],
-                    
-                ];
-                $estado = $pedido['estado'];
-                if($estado[0] == 'S'){
-                    $pedido['elaborado'] = 'checked';
-                }
-                else{
-                    $pedido['elaborado'] = '';
-                }
-                if($estado[1] == 'S'){
-                    $pedido['entregado'] = 'checked';
-                }
-                else{
-                    $pedido['entregado'] = '';
-                }
-                if($estado[2] == 'S'){
-                    $pedido['facturado'] = 'checked';
-                }
-                else{
-                    $pedido['facturado'] = '';
-                }
-                // isset($pedido['activo'])? 'Activo':'Inactivo';
-                if($pedido['activo'] == '1'){
-                    $pedido['activo'] = 'Pendiente';
-                }
-                else{
-                    $pedido['activo'] = 'Finalizado';
-                }
-                if($pedido['modalidad'] == 'DO'){
-                    $pedido['modalidad'] = 'Domicilio';
-                }
-                else if($pedido['modalidad'] == 'ME'){
-                    $pedido['modalidad'] = 'Mesa';
-                }
-                else{
-                    $pedido['modalidad'] = 'Llevar';
-                }
-                
-                array_push($lista,$pedido);
-            }
-            return $lista;
-        } catch (\Throwable $th) {
-            var_dump($th);
-        }
     }
 
     public function listar($filtro,$buscar,$estado){

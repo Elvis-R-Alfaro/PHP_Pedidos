@@ -69,7 +69,7 @@
                   <div class="form-group col-md-6">
                     <label for="fechahora">Estado del Pedido</label>
                     <div class="row">
-                      <!-- <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success mr-4 ml-2">
+                       <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success mr-4 ml-2">
                         <input type="checkbox" class="custom-control-input" id="elaborado" name="elaborado" value="1" checked control-id="ControlID-43">
                         <label class="custom-control-label" for="elaborado">Elaborado</label>
                       </div>
@@ -80,25 +80,9 @@
                       <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success mr-4">
                         <input type="checkbox" class="custom-control-input" id="facturado" name="facturado" value="1" checked control-id="ControlID-43">
                         <label class="custom-control-label" for="facturado">Facturado</label>
-                      </div> -->
+                      </div>
                     </div>
                   </div>
-                </div>
-                <button type="button" onclick="AgregarFila()">A</button>
-                <div class="table-responsive">
-                  <table id="detallePedido" class="table m-0">
-                    <thead>
-                      <tr>
-                        <th>Producto</th>
-                        <th>Cantidad</th>
-                        <th>SubProducto</th>
-                        <th>Notas</th>
-                        <th>Acciones</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                  </table>
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
@@ -129,21 +113,6 @@
   <script>
     var conteoDetallePedidos = 0
 
-    function AgregarFila() {
-      $('#detallePedido > tbody:last-child')
-      .append('<tr id="2" ><td><select select class="form-control cmbbuscar1 select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="7" tabindex="-1" aria-hidden="true" name="detallePedido[' + conteoDetallePedidos + '][producto]" class="form-control" ><option value="" selected>Seleccione un valor</option><?php foreach ($this->productos as $subproducto) { ?> <option value="<?php echo $subproducto['codigo'] ?>"><?php echo $subproducto['nombre'] ?></option><?php } ?><td></select><input type="number" step="1" name="detallePedido[' + conteoDetallePedidos + '][cantidad]" class="form-control" placeholder="Escriba la cantidad" required></td><td><select select class="form-control cmbbuscar3 select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="6" ta name="detallePedido[' + conteoDetallePedidos + '][subproducto]"><option value="" selected>Seleccione un valor</option><?php foreach ($this->productos as $producto) { ?> <option value=" <?php echo $producto['codigo'] ?>"><?php echo $producto['nombre'] ?></option><?php } ?> </select></td><td><input type="text" name="detallePedido[' + conteoDetallePedidos + '][notas]" class="form-control" placeholder="Escriba notas" required></td><td><div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success mr-4"><input type="checkbox" class="custom-control-input" id="detallePedido[' + conteoDetallePedidos + '][elaborado]" name="detallePedido[' + conteoDetallePedidos + '][elaborado]" value="1" checked control-id="ControlID-' + conteoDetallePedidos + '"><label class="custom-control-label" for="detallePedido[' + conteoDetallePedidos + '][elaborado]">Elaborado</label></div><div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success mr-4"><input type="checkbox" class="custom-control-input" id="detallePedido[' + conteoDetallePedidos + '][entregado]" name="detallePedido[' + conteoDetallePedidos + '][entregado]" value="1" checked control-id="ControlID-' + conteoDetallePedidos + '"><label class="custom-control-label" for="detallePedido[' + conteoDetallePedidos + '][entregado]">Entregado</label></div><div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success mr-4"><input type="checkbox" class="custom-control-input" id="detallePedido[' + conteoDetallePedidos + '][facturado]" name="detallePedido[' + conteoDetallePedidos + '][facturado]" value="1" checked control-id="ControlID-' + conteoDetallePedidos + '"><label class="custom-control-label" for="detallePedido[' + conteoDetallePedidos + '][facturado]">Facturado</label></div></td><td><button class="btn btn-danger" type="button" onclick="EliminarFila(2)"><i class="text-white fas fa-backspace"></i></button></td></tr>');
-      conteoDetallePedidos++
-      $('.cmbbuscar1').select2();
-          $('.cmbbuscar3').select2();
-    }
-
-    function EliminarFila(id) {
-      $('#' + id).remove();
-    }
-
-    $(document).ready(function() {
-      
-    });
     $(document).ready(function() {
       $('.cmbBuscarEstacion').select2();
       $('.cmbBuscarMesero').select2();
@@ -158,18 +127,6 @@
       var x = 1;
       var y = 1;
       var max = 1;
-
-      //Once add button is clicked
-      $(Document).ready(function AgregarFila() {
-        <?php foreach($this->datosDetalle as $detalle){
-        ?>
-          $('#detallePedido > tbody:last-child')
-          .append('<tr id="2" ><td><select select class="form-control cmbbuscar1 select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="7" tabindex="-1" aria-hidden="true" name="detallePedido[' + conteoDetallePedidos + '][producto]" class="form-control" ><option value="<?php echo $detalle['CodigoProducto'] ?>" selected><?php echo $detalle['Nombre'] ?></option><?php foreach ($this->productos as $subproducto) { ?> <option value="<?php echo $subproducto['codigo'] ?>"><?php echo $subproducto['nombre'] ?></option><?php } ?><td></select><input type="number" step="1" name="detallePedido[' + conteoDetallePedidos + '][cantidad]" class="form-control" placeholder="Escriba la cantidad" value="<?php echo $detalle['Cantidad'] ?>" required></td><td><select select class="form-control cmbbuscar3 select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="6" ta name="detallePedido[' + conteoDetallePedidos + '][subproducto]"><option value="<?php echo $detalle['CodigoProducto'] ?>" selected><?php echo $detalle['Nombre'] ?></option><?php foreach ($this->productos as $producto) { ?> <option value=" <?php echo $producto['codigo'] ?>"><?php echo $producto['nombre'] ?></option><?php } ?> </select></td><td><input type="text" name="detallePedido[' + conteoDetallePedidos + '][notas]" class="form-control" placeholder="Escriba notas" value="<?php echo $detalle['Notas'] ?>" ></td><td><div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success mr-4"><input type="checkbox" class="custom-control-input" id="detallePedido[' + conteoDetallePedidos + '][cancelado]" name="detallePedido[' + conteoDetallePedidos + '][cancelado]" value="<?php echo $detalle['Cancelado'] ?>" <?php $checked = $detalle['Cancelado'] ?  "checked" : ""; echo $checked ?> control-id="ControlID-' + conteoDetallePedidos + '"><label class="custom-control-label" for="detallePedido[' + conteoDetallePedidos + '][cancelado]">Cancelado</label></div><div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success mr-4"><input type="checkbox" class="custom-control-input" id="detallePedido[' + conteoDetallePedidos + '][elaborado]" name="detallePedido[' + conteoDetallePedidos + '][elaborado]" value="<?php echo $detalle['Elaborado'] ?>" <?php $checked = $detalle['Elaborado'] ?  "checked" : ""; echo $checked ?> control-id="ControlID-' + conteoDetallePedidos + '"><label class="custom-control-label" for="detallePedido[' + conteoDetallePedidos + '][elaborado]">Elaborado</label></div><div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success mr-4"><input type="checkbox" class="custom-control-input" id="detallePedido[' + conteoDetallePedidos + '][entregado]" name="detallePedido[' + conteoDetallePedidos + '][entregado]" value="<?php echo $detalle['Entregado'] ?>" <?php $checked = $detalle['Entregado'] ?  "checked" : ""; echo $checked ?> control-id="ControlID-' + conteoDetallePedidos + '"><label class="custom-control-label" for="detallePedido[' + conteoDetallePedidos + '][entregado]">Entregado</label></div><div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success mr-4"><input type="checkbox" class="custom-control-input" id="detallePedido[' + conteoDetallePedidos + '][facturado]" name="detallePedido[' + conteoDetallePedidos + '][facturado]" value="<?php echo $detalle['Facturado'] ?>" <?php $checked = $detalle['Facturado'] ?  "checked" : ""; echo $checked ?> control-id="ControlID-' + conteoDetallePedidos + '"><label class="custom-control-label" for="detallePedido[' + conteoDetallePedidos + '][facturado]">Facturado</label></div></td><td><button class="btn btn-danger" type="button" onclick="EliminarFila(2)"><i class="text-white fas fa-backspace"></i></button></td></tr>');
-          conteoDetallePedidos++
-          $('.cmbbuscar1').select2();
-          $('.cmbbuscar3').select2();
-        <?php } ?>
-    })
       $(cmbModalidad).ready(function() {
         var cmbModalidadValor = cmbModalidad.options[cmbModalidad.selectedIndex].text; //Get initial value
         console.log(cmbModalidadValor);

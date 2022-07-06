@@ -1,9 +1,4 @@
-<?php 
-
-$expira = time() + (3600*24*30); //tiempo de expiración de la cookie en 30 días
-setcookie("id", "ids", $expira);
-
-include 'vistas/plantilla/encabezado.php'; ?>
+<?php include 'vistas/plantilla/encabezado.php'; ?>
 <div class="wrapper">
   <?php
   require 'vistas/plantilla/nav.php';
@@ -14,7 +9,7 @@ include 'vistas/plantilla/encabezado.php'; ?>
   <!-- Main content -->
   <section class="content">
     <div class="container-fluid">
-      <h5 class="mb-2 mt-4">Lista de Pedidos</h5>
+      <h5 class="mb-2 mt-4">Lista de cargos</h5>
       <div class="row">
         <!-- Left col -->
         <div class="col-md-12">
@@ -33,7 +28,7 @@ include 'vistas/plantilla/encabezado.php'; ?>
                       <th>MESERO</th>
                       <th>FECHA Y HORA</th>
                       <th>ESTACION</th>
-                      <th>ESTADO</th>
+                      <!-- <th>ESTADO</th> -->
                       <th>MODALIDAD</th>
                       <th>ESTADO DEL PEDIDO</th>
                     </tr>
@@ -41,14 +36,14 @@ include 'vistas/plantilla/encabezado.php'; ?>
                   <tbody>
                     <?php foreach ($this->datos as $row) { ?>
                       <tr>
-                        <td><a href="/pedidos/buscarId?id=<?php echo $row['NumeroPedido']; ?>"><?php echo $row['NumeroPedido']; ?></a></td>
+                        <td><a href="/pedidos1/buscarId?id=<?php echo $row['NumeroPedido']; ?>"><?php echo $row['NumeroPedido']; ?></a></td>
                         <td><?php echo $row['nombremesero']; ?></td>
                         <td><?php echo $row['fechahora']; ?></td>
                         <td><?php echo $row['nombreestacion']; ?></td>
-                       <td><?php echo $row['activo']; ?></td>
+                       <!--  <td><?php echo $row['activo']; ?></td> -->
                         <td><?php echo $row['modalidad']; ?></td>
                         <td>
-                          <?php echo $row['estado']; ?>
+                          <!-- <?php echo $row['estado']; ?> -->
                           <!-- <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
                             <input type="checkbox" readonly class="custom-control-input"  id="elaborado<?php echo $row['NumeroPedido']; ?>" name="elaborado<?php echo $row['NumeroPedido']; ?>" value="<?php echo $row['elaborado']; ?>" checked control-id="ControlID-45">
                             <label class="custom-control-label"  for="elaborado<?php echo $row['NumeroPedido']; ?>">Elaborado</label>
@@ -67,8 +62,8 @@ include 'vistas/plantilla/encabezado.php'; ?>
                           </div>
                         </td>
                         <td>
-                          <a class="btn btn-warning" href="/pedidos/buscarId?id=<?php echo $row['NumeroPedido']; ?>"><i class="text-white fas fa-edit"></i></a>
-                          <a class="btn btn-danger" onclick="return confirm('Estas seguro de eliminar?')" href="/pedidos/eliminar?id=<?php echo $row['NumeroPedido']; ?>"><i class="text-white fas fa-trash"></i></a>
+                          <a class="btn btn-warning" href="/pedidos1/buscarId?id=<?php echo $row['NumeroPedido']; ?>">Editar</a>
+                          <a class="btn btn-danger" onclick="return confirm('Estas seguro de eliminar?')" href="/pedidos1/eliminar?id=<?php echo $row['NumeroPedido']; ?>">Eliminar</a>
                         </td>
                       </tr>
                     <?php  } ?>
@@ -79,8 +74,8 @@ include 'vistas/plantilla/encabezado.php'; ?>
             </div>
             <!-- /.card-body -->
             <div class="card-footer clearfix">
-              <a href="/pedidos/nuevo" class="btn btn-sm btn-info float-left">Generar nuevo pedido</a>
-              <a href="/pedidos/anulados" class="btn btn-sm btn-secondary float-right">Ver pedido Anulados</a>
+              <a href="/pedidos1/nuevo" class="btn btn-sm btn-info float-left">Generar nuevo pedido</a>
+              <a href="/pedidos1/buscar" class="btn btn-sm btn-secondary float-right">Buscar pedido</a>
             </div>
             <!-- /.card-footer -->
           </div>

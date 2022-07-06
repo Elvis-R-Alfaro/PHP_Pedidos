@@ -2,10 +2,20 @@
 class detallepedidosModelo extends Modelo{
     function __construct(){
         parent::__construct();
+        $opciones = [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_EMULATE_PREPARES => false,
+        ];
+        $this->pdo = new PDO("mysql:host=localhost;dbname=sigresdesarrollo;charset=utf8", "root", "", $opciones);
+        
     }
+
     public function insert($datos){
-        $query = $this->db->conectar()->prepare("INSERT INTO detalle_pedido (NumeroPedido, CodigoProducto,Cantidad,Notas,subproducto,Cancelado,Elaborado,Entregado,Facturado) VALUES (:numeropedidos, :codigoproducto, :cantidad, :notas, :subproducto, :cancelado, :elaborado, :entregado, :facturado)");
+        
+        $query = $this->pdo->prepare("INSERT INTO detalle_pedido (NumeroPedido, CodigoProducto,Cantidad,Notas,subproducto,Cancelado,Elaborado,Entregado,Facturado) VALUES (:numeropedidos, :codigoproducto, :cantidad, :notas, :subproducto, :cancelado, :elaborado, :entregado, :facturado)");
         $query->execute($datos);
+        $id = $this->pdo->lastInsertId();
+        return $id;
     }
     public function insertBulk($arregloDetallePedido,$ultimoIdPedido){
         foreach($arregloDetallePedido as $item){

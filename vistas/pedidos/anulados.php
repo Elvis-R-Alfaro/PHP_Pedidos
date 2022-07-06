@@ -67,8 +67,8 @@ include 'vistas/plantilla/encabezado.php'; ?>
                           </div>
                         </td>
                         <td>
-                          <a class="btn btn-warning" href="/pedidos/buscarId?id=<?php echo $row['NumeroPedido']; ?>"><i class="text-white fas fa-edit"></i></a>
-                          <a class="btn btn-danger" onclick="return confirm('Estas seguro de eliminar?')" href="/pedidos/eliminar?id=<?php echo $row['NumeroPedido']; ?>"><i class="text-white fas fa-trash"></i></a>
+                          
+                          <a class="btn btn-danger" onclick="return confirm('Estas seguro de restaurar este pedido?')" href="/pedidos/restaurar?id=<?php echo $row['NumeroPedido']; ?>"><i class="text-white fas fa-undo"></i></a>
                         </td>
                       </tr>
                     <?php  } ?>
@@ -80,7 +80,7 @@ include 'vistas/plantilla/encabezado.php'; ?>
             <!-- /.card-body -->
             <div class="card-footer clearfix">
               <a href="/pedidos/nuevo" class="btn btn-sm btn-info float-left">Generar nuevo pedido</a>
-              <a href="/pedidos/anulados" class="btn btn-sm btn-secondary float-right">Ver pedido Anulados</a>
+              <a href="/pedidos" class="btn btn-sm btn-secondary float-right">Ver pedido</a>
             </div>
             <!-- /.card-footer -->
           </div>
