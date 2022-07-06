@@ -12,7 +12,7 @@
 
     <section class="content-header">
         <div class="container-fluid">
-            <h2 class="text-center display-4">Buscar</h2>
+            <h2 class="text-center display-4">Buscar pedidos x ventas</h2>
         </div>
     </section>
 

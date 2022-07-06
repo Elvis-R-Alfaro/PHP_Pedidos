@@ -9,7 +9,7 @@
   <!-- Main content -->
   <section class="content">
         <div class="container-fluid">
-          <h5 class="mb-2 mt-4">Lista de Pedidos</h5>
+          <h5 class="mb-2 mt-4">Lista de Pedidos x Ventas</h5>
           <div class="row">
             <!-- Left col -->
             <div class="col-md-12">
@@ -49,8 +49,8 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer clearfix">
-                  <a href="/pedidosventas/nuevo" class="btn btn-sm btn-info float-left">Nuevo pedido</a>
-                  <a href="/pedidosventas/buscar" class="btn btn-sm btn-secondary float-right">Buscar pedido</a>
+                  <a href="/pedidosventas/nuevo" class="btn btn-sm btn-info float-left">Nuevo pedido venta</a>
+                  <a href="/pedidosventas/buscar" class="btn btn-sm btn-secondary float-right">Buscar pedido venta</a>
                 </div>
                 <!-- /.card-footer -->
               </div>
