@@ -62,8 +62,8 @@
                           </div>
                         </td>
                         <td>
-                          <a class="btn btn-warning" href="/pedidos/buscarId?id=<?php echo $row['NumeroPedido']; ?>">Editar</a>
-                          <a class="btn btn-danger" onclick="return confirm('Estas seguro de eliminar?')" href="/pedidos/eliminar?id=<?php echo $row['NumeroPedido']; ?>">Eliminar</a>
+                          <a class="btn btn-warning" href="/pedidos/buscarId?id=<?php echo $row['NumeroPedido']; ?>"><i class="text-white fas fa-edit"></i></a>
+                          <a class="btn btn-danger" onclick="return confirm('Estas seguro de eliminar?')" href="/pedidos/eliminar?id=<?php echo $row['NumeroPedido']; ?>"><i class="text-white fas fa-trash"></i></a>
                         </td>
                       </tr>
                     <?php  } ?>

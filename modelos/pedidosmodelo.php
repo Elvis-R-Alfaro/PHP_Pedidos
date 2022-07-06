@@ -45,7 +45,7 @@ class PedidosModelo extends Modelo{
                 $sql = 'SELECT pedidos.*,meseros.nombre AS nombremesero,estaciones.nombre AS nombreestacion FROM pedidos 
                 JOIN meseros ON pedidos.idmesero = meseros.idmesero 
                 JOIN estaciones on pedidos.Estacion = estaciones.NumeroEstacion 
-                WHERE pedidos.estado != "AAA"';
+                WHERE pedidos.estado != "AAA" order by pedidos.NumeroPedido asc';
             }
             else{
                 $sql = 'SELECT pedidos.*,meseros.nombre AS nombremesero, estaciones.nombre AS nombreestacion FROM pedidos
@@ -170,18 +170,33 @@ class PedidosModelo extends Modelo{
     public function buscarId($id){
         $lista=[];
         try {
-            $sql = 'select * from pedidos where NumeroPedido='.$id;
+            $sql = 'select pedidos.*, meseros.*, estaciones.NumeroEstacion, estaciones.nombre AS nombreEstacion from pedidos 
+            JOIN meseros ON pedidos.idmesero = meseros.idmesero 
+            JOIN estaciones on pedidos.Estacion = estaciones.NumeroEstacion 
+            where NumeroPedido='.$id;
             $query = $this->db->conectar()->query($sql);
             foreach ($query as $row) {
                 $pedido =[
                     'id' => $row['NumeroPedido'],
                     'idmesero' => $row['idmesero'],
+                    'nombre' => $row['nombre'],
                     'fechahora' => $row['fechahora'],
                     'Estacion' => $row['Estacion'],
                     'activo' => $row['activo'],
                     'modalidad' => $row['modalidad'],
-                    'estado' => $row['estado']
+                    'estado' => $row['estado'],
+                    'nombreEstacion' => $row['nombreEstacion']
                 ];
+                $modalidad = $pedido['modalidad'];
+                if($modalidad == 'DO'){
+                    $pedido['modalidadNombre'] = 'Domicilio';
+                }
+                else if($modalidad == 'ME'){
+                    $pedido['modalidadNombre'] = 'Mesa';
+                }
+                else{
+                    $pedido['modalidadNombre'] = 'Llevar';
+                }
                 array_push($lista,$pedido);
             }
             return $lista;

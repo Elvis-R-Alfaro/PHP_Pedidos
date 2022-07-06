@@ -25,8 +25,8 @@
                 <div class="row">
                   <div class="form-group col-md-6">
                     <label for="idmesero">Mesero</label>
-                    <select class="form-control" id="idmesero" name="idmesero" placeholder="Id mesero">
-                      <option value="" selected disabled hidden>Seleccione un valor</option>
+                    <select class="form-control cmbBuscarMesero select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="2" tabindex="-1" aria-hidden="true" name="idmesero">
+                      <option value="" selected>Seleccione un valor</option>
                       <?php
                       foreach ($this->datos as $mesero) { ?>
                         <option value=" <?php echo $mesero['idmesero'] ?>"><?php echo $mesero['nombre'] ?></option>
@@ -37,8 +37,8 @@
                   </div>
                   <div class="form-group col-md-6">
                     <label for="Estacion">Estacion</label>
-                    <select class="form-control" id="Estacion" name="Estacion" placeholder="Estacion">
-                      <option value="" selected disabled hidden>Seleccione un valor</option>
+                    <select class="form-control cmbBuscarEstacion select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="3" tabindex="-1" aria-hidden="true" name="Estacion">
+                      <option value="" selected>Seleccione un valor</option>
                       <?php
                       foreach ($this->estaciones as $estacion) { ?>
                         <option value=" <?php echo $estacion['NumeroEstacion'] ?>"><?php echo $estacion['nombre'] ?></option>
@@ -50,7 +50,7 @@
                   <div class="form-group col-md-6">
                     <label for="modalidad">Modalidad</label>
                     <select class="form-control" id="modalidad" name="modalidad" placeholder="Modalidad">
-                      <option value="" selected disabled hidden>Seleccione un valor</option>
+                      <option value="" selected>Seleccione un valor</option>
                       <option value="LL">Llevar</option>
                       <option value="DO">Domicilio</option>
                       <option value="ME">Mesa</option>
@@ -84,7 +84,8 @@
                     </div>
                   </div>
                 </div>
-                <button type="button" onclick="AgregarFila()">A</button>
+                <label for="">Agregar Fila</label>
+                <button type="button" class="btn btn-success" onclick="AgregarFila()"><i class="text-white fas fa-plus-square"></i></button>
                 <div class="table-responsive">
                   <table id="detallePedido" class="table m-0">
                     <thead>
@@ -131,9 +132,16 @@
 
     function AgregarFila() {
       $('#detallePedido > tbody:last-child')
-        .append('<tr id="2" ><td><input type="text" name="detallePedido[' + conteoDetallePedidos + '][producto]" class="form-control" placeholder="Escriba el nombre del producto" required></td><td><input type="number" step="1" name="detallePedido[' + conteoDetallePedidos + '][cantidad]" class="form-control" placeholder="Escriba la cantidad" required></td><td><input type="number" name="detallePedido[' + conteoDetallePedidos + '][subproducto]" class="form-control" placeholder="Escriba el nombre del subproducto" required></td><td><input type="text" name="detallePedido[' + conteoDetallePedidos + '][notas]" class="form-control" placeholder="Escriba notas" required></td><td><button type="button" onclick="EliminarFila(2)">A</button></td></tr>');
+        .append('<tr id="2" ><td><select select class="form-control cmbbuscar1 select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="7" tabindex="-1" aria-hidden="true" name="detallePedido[' + conteoDetallePedidos + '][producto]" class="form-control" ><option value="" selected>Seleccione un valor</option><?php foreach ($this->productos as $subproducto) { ?> <option value="<?php echo $subproducto['codigo'] ?>"><?php echo $subproducto['nombre'] ?></option><?php } ?><td></select><input type="number" step="1" name="detallePedido[' + conteoDetallePedidos + '][cantidad]" class="form-control" placeholder="Escriba la cantidad" required></td><td><select select class="form-control cmbbuscar3 select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="6" ta name="detallePedido[' + conteoDetallePedidos + '][subproducto]"><option value="" selected>Seleccione un valor</option><?php foreach ($this->productos as $producto) { ?> <option value=" <?php echo $producto['codigo'] ?>"><?php echo $producto['nombre'] ?></option><?php } ?> </select></td><td><input type="text" name="detallePedido[' + conteoDetallePedidos + '][notas]" class="form-control" placeholder="Escriba notas" required></td><td><button class="btn btn-danger" type="button" onclick="EliminarFila(2)"><i class="text-white fas fa-backspace"></i></button></td></tr>');
       conteoDetallePedidos++
+      $('.cmbbuscar1').select2();
+      $('.cmbbuscar3').select2();
     }
+
+    $(document).ready(function() {
+      $('.cmbBuscarEstacion').select2();
+      $('.cmbBuscarMesero').select2();
+    });
 
     function EliminarFila(id) {
       $('#' + id).remove();
@@ -148,8 +156,10 @@
     $(document).ready(function() {
       var cmbModalidad = document.getElementById('modalidad'); //Add button selector
       var wrapper = $('#field_wrapper'); //Input field wrapper
-      var fieldHTML = '<div id="mesa" class="col-md-12 row"><div class="form-group col-md-6" data-select2-id="63"><label>Cliente</label><select class="form-control cmbbuscar select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true"><option value="" selected disabled hidden>Seleccione un valor</option><?php foreach ($this->clientes as $cliente) { ?> <option value=" <?php echo $cliente['idcliente'] ?>"><?php echo $cliente['nombre'] ?></option><?php } ?> </select></div><div class="form-group col-md-6" id="idmesa"><label for="activo">Mesa</label><select class="form-control" id="activo" name="activo" placeholder="Activo"><option value="1" default>Activo</option><option value="0">Inactivo</option></select></div><div class="form-group col-md-6"><label for="idpedido">Cuenta</label><input type="text" class="form-control" id="cuenta" name="cuenta" placeholder="Cuenta" required></div><div class="form-group col-md-6"><label for="idcliente">Nombre de la Cuenta</label><input type="text" class="form-control" id="idcliente" name="nombrecuenta" placeholder="Nombre de la cuenta" required></div></div>'; //New input field html 
+      var fieldMesa = '<div id="mesa" class="col-md-12 row"><div class="form-group col-md-6"><label for="idcliente">N° Mesa</label><select class="form-control cmbbuscarMesa select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="4" tabindex="-1" aria-hidden="true" name="idmesa"><option value="" selected disabled hidden>Seleccione un valor</option><?php foreach ($this->mesas as $mesa) { ?><option value=" <?php echo $mesa['idregistro'] ?>"><?php echo $mesa['Mesa'] ?></option><?php } ?></select></div><div class="form-group col-md-6"><label for="idpedido">Cuenta</label><input type="text" class="form-control" id="cuenta" name="cuenta" placeholder="Cuenta" required></div><div class="form-group col-md-6"><label for="idcliente">Nombre de la Cuenta</label><input type="text" class="form-control" id="nombrecuenta" name="nombrecuenta" placeholder="Nombre de la cuenta" required></div></div>'; //New input field html 
+      var fieldLlevar = '<div id="mesa2" class="col-md-12 row"><div class="form-group col-md-6" data-select2-id="63"><label>Cliente</label><select class="form-control cmbbuscar select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true" name="idcliente"><option value="" selected>Seleccione un valor</option><?php foreach ($this->clientes as $cliente) { ?> <option value=" <?php echo $cliente['idcliente'] ?>"><?php echo $cliente['nombre'] ?></option><?php } ?> </select></div>';
       var x = 1;
+      var y = 1;
       var max = 1;
 
       //Once add button is clicked
@@ -158,12 +168,23 @@
         console.log(cmbModalidadValor);
         if (cmbModalidadValor == 'Mesa' && max <= 1) {
           x++;
-          console.log("hola2");
-          $(wrapper).append(fieldHTML);          
+          $(wrapper).append(fieldMesa);          
           $('.cmbbuscar').select2();
-        } else {
+         
+          $('.cmbbuscarMesa').select2();
+        }
+         else {
           x == 0;
           $('#mesa').remove();
+        }
+        if (cmbModalidadValor == 'Llevar' && max <= 1) {
+          x++;
+          $(wrapper).append(fieldLlevar);          
+          $('.cmbbuscar').select2();
+        }
+         else {
+          x == 0;
+          $('#mesa2').remove();
         } //Add field html
       });
     });

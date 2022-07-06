@@ -1,75 +1,216 @@
 <?php include 'vistas/plantilla/encabezado.php'; ?>
 <div class="wrapper">
-    <?php 
-        require 'vistas/plantilla/nav.php'; 
-        require 'vistas/plantilla/menulateral.php';
-        require 'vistas/plantilla/contenidotitulo.php';
-    ?>
-<?php
-?>
-    <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <!-- left column -->
-          <div class="col-md-12">
-            <!-- jquery validation -->
-            <div class="card card-primary">
-              <div class="card-header">
-                <h3 class="card-title">Datos generales <small>Pedidos</small></h3>
-              </div>
-              <!-- /.card-header -->
-              <!-- form start -->
-              <form id="quickForm" action="/pedidos/actualizar?id=<?php echo $this->datos[0]['id'] ?>" method="post">
-                <div class="card-body">
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="idmesero">Id mesero</label>
-                            <input type="text" class="form-control" id="idmesero" name="idmesero" placeholder="Id mesero" value="<?php echo $this->datos[0]['idmesero'] ?>">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="Estacion">Estacion</label>
-                            <input type="text" class="form-control" id="Estacion" name="Estacion" placeholder="Estacion" value="<?php echo $this->datos[0]['Estacion'] ?>">
-                        </div>
+  <?php
+  require 'vistas/plantilla/nav.php';
+  require 'vistas/plantilla/menulateral.php';
+  require 'vistas/plantilla/contenidotitulo.php';
+  ?>
+  <?php
+  ?>
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+          <!-- jquery validation -->
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Datos generales <small>Pedidos</small></h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form id="quickForm" action="/pedidos/actualizar?id=<?php echo $this->datos[0]['id'] ?>" method="post">
+              <div class="card-body">
+                <div class="row">
+                  <div class="form-group col-md-6">
+                    <label for="idmesero">Mesero</label>
+                    <select class="form-control cmbBuscarMesero select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="2" tabindex="-1" aria-hidden="true" name="idmesero">
+                      <option value="<?php echo $this->datos[0]['idmesero'] ?>"><?php echo $this->datos[0]['nombre'] ?></option>
+                      <?php
+                      foreach ($this->meseros as $mesero) { ?>
+                        <option value=" <?php echo $mesero['idmesero'] ?>"><?php echo $mesero['nombre'] ?></option>
+                      <?php
+                      }
+                      ?>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="Estacion">Estacion</label>
+                    <select class="form-control" id="Estacion" name="Estacion" placeholder="Estacion">
+                      <option value="<?php echo $this->datos[0]['nombreEstacion'] ?>" selected><?php echo $this->datos[0]['nombreEstacion'] ?></option>
+                      <?php
+                      foreach ($this->estaciones as $estacion) { ?>
+                        <option value=" <?php echo $estacion['NumeroEstacion'] ?>"><?php echo $estacion['nombre'] ?></option>
+                      <?php
+                      }
+                      ?>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="modalidad">Modalidad</label>
+                    <select class="form-control" id="modalidad" name="modalidad" placeholder="Modalidad">
+                      <option value="<?php echo $this->datos[0]['modalidad'] ?>" selected><?php echo $this->datos[0]['modalidadNombre'] ?></option>
+                      <option value="LL">Llevar</option>
+                      <option value="DO">Domicilio</option>
+                      <option value="ME">Mesa</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="activo">Estado</label>
+                    <select class="form-control" id="activo" name="activo" placeholder="Activo">
+                      <option value="1" default>Pendiente</option>
+                      <option value="0">Finalizado</option>
+                    </select>
+                  </div>
+                  <div id="field_wrapper" class="col-md-12">
+                  <!-- <div class="form-group col-md-6"><label>Cliente</label><select class="form-control cmbbuscar select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true"><option value="" selected disabled hidden>Seleccione un valor</option><?php foreach ($this->clientes as $cliente) { ?> <option value=" <?php echo $cliente['idcliente'] ?>"><?php echo $cliente['nombre'] ?></option><?php } ?> </select></div>                     -->
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="fechahora">Estado del Pedido</label>
+                    <div class="row">
+                      <!-- <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success mr-4 ml-2">
+                        <input type="checkbox" class="custom-control-input" id="elaborado" name="elaborado" value="1" checked control-id="ControlID-43">
+                        <label class="custom-control-label" for="elaborado">Elaborado</label>
+                      </div>
+                      <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success mr-4">
+                        <input type="checkbox" class="custom-control-input" id="entregado" name="entregado" value="1" checked control-id="ControlID-43">
+                        <label class="custom-control-label" for="entregado">Entregado</label>
+                      </div>
+                      <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success mr-4">
+                        <input type="checkbox" class="custom-control-input" id="facturado" name="facturado" value="1" checked control-id="ControlID-43">
+                        <label class="custom-control-label" for="facturado">Facturado</label>
+                      </div> -->
                     </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="activo">Activo</label>
-                            <input type="text" class="form-control" id="activo" name="activo" placeholder="Activo" value="<?php echo $this->datos[0]['activo'] ?>">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="modalidad">Modalidad</label>
-                            <input type="text" class="form-control" id="modalidad" name="modalidad" placeholder="Modalidad" value="<?php echo $this->datos[0]['modalidad'] ?>">
-                        </div>
-                    </div>
-                    <div class="form-row">                        
-                        <div class="form-group col-md-12">
-                            <label for="estado">Estado</label>
-                            <input type="text" class="form-control" id="estado" name="estado" placeholder="Estado" value="<?php echo $this->datos[0]['estado'] ?>">
-                        </div>
-                    </div>                 
+                  </div>
+                </div>
+                <button type="button" onclick="AgregarFila()">A</button>
+                <div class="table-responsive">
+                  <table id="detallePedido" class="table m-0">
+                    <thead>
+                      <tr>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>SubProducto</th>
+                        <th>Notas</th>
+                        <th>Acciones</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                  </table>
+                </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary toastrDefaultSuccess">Actualizar</button>
+                  <button type="submit" class="btn btn-primary toastrDefaultSuccess">Guardar</button>
                 </div>
-              </form>
-            </div>
-            <!-- /.card -->
-            </div>
-          <!--/.col (left) -->
-          <!-- right column -->
-          <div class="col-md-6">
-
+            </form>
           </div>
-          <!--/.col (right) -->
+          <!-- /.card -->
         </div>
-        <!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
-<?php include 'vistas/plantilla/pie.php'; ?>
-<!-- Aqui agregar script adicionales -->
-<!-- jquery-validation -->
-<script src="/public/plugins/jquery-validation/jquery.validate.min.js"></script>
-<script src="/public/plugins/jquery-validation/additional-methods.min.js"></script>
-<?php include 'vistas/plantilla/script.php'; ?>
+        <!--/.col (left) -->
+        <!-- right column -->
+        <div class="col-md-6">
+
+        </div>
+        <!--/.col (right) -->
+      </div>
+      <!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+  <?php include 'vistas/plantilla/pie.php'; ?>
+  <!-- Aqui agregar script adicionales -->
+  <!-- jquery-validation -->
+  <script src="/public/plugins/jquery-validation/jquery.validate.min.js"></script>
+  <script src="/public/plugins/jquery-validation/additional-methods.min.js"></script>
+  <?php include 'vistas/plantilla/script.php'; ?>
+
+  <script>
+    var conteoDetallePedidos = 0
+
+    function AgregarFila() {
+      $('#detallePedido > tbody:last-child')
+        .append('<tr id="2" ><td><input type="text" name="detallePedido[' + conteoDetallePedidos + '][producto]" class="form-control" placeholder="Escriba el nombre del producto" required></td><td><input type="number" step="1" name="detallePedido[' + conteoDetallePedidos + '][cantidad]" class="form-control" placeholder="Escriba la cantidad" required></td><td><input type="number" name="detallePedido[' + conteoDetallePedidos + '][subproducto]" class="form-control" placeholder="Escriba el nombre del subproducto" required></td><td><input type="text" name="detallePedido[' + conteoDetallePedidos + '][notas]" class="form-control" placeholder="Escriba notas" required></td><td><div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success mr-4"><input type="checkbox" class="custom-control-input" id="detallePedido[' + conteoDetallePedidos + '][elaborado]" name="detallePedido[' + conteoDetallePedidos + '][elaborado]" value="1" checked control-id="ControlID-' + conteoDetallePedidos + '"><label class="custom-control-label" for="detallePedido[' + conteoDetallePedidos + '][entregado]">Elaborado</label></div><div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success mr-4"><input type="checkbox" class="custom-control-input" id="detallePedido[' + conteoDetallePedidos + '][entregado]" name="detallePedido[' + conteoDetallePedidos + '][entregado]" value="1" checked control-id="ControlID-' + conteoDetallePedidos + '"><label class="custom-control-label" for="detallePedido[' + conteoDetallePedidos + '][facturado]">Entregado</label></div><div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success mr-4"><input type="checkbox" class="custom-control-input" id="detallePedido[' + conteoDetallePedidos + '][facturado]" name="detallePedido[' + conteoDetallePedidos + '][facturado]" value="1" checked control-id="ControlID-' + conteoDetallePedidos + '"><label class="custom-control-label" for="facturado">Facturado</label></div></td><td><button class="btn btn-danger" type="button" onclick="EliminarFila(2)"><i class="text-white fas fa-backspace"></i></button></td></tr>');
+      conteoDetallePedidos++
+    }
+
+    function EliminarFila(id) {
+      $('#' + id).remove();
+    }
+
+    $(document).ready(function() {
+      
+    });
+    $(document).ready(function() {
+      $('.cmbBuscarEstacion').select2();
+      $('.cmbBuscarMesero').select2();
+    });
+
+
+    $(document).ready(function() {
+      var cmbModalidad = document.getElementById('modalidad'); //Add button selector
+      var wrapper = $('#field_wrapper'); //Input field wrapper
+      var fieldMesa = '<div id="mesa" class="col-md-12 row"><div class="form-group col-md-6"><label for="idcliente">N° Mesa</label><select class="form-control" id="idmesa" name="idmesa"><option value="<?php echo $this->datosMesa[0]['idmesa'] ?>" selected disabled hidden><?php echo $this->datosMesa[0]['Mesa'] ?></option><?php foreach ($this->mesas as $mesa) { ?><option value=" <?php echo $mesa['idregistro'] ?>"><?php echo $mesa['Mesa'] ?></option><?php } ?></select></div><div class="form-group col-md-6"><label for="idpedido">Cuenta</label><input type="text" class="form-control" id="cuenta" name="cuenta" value="<?php echo $this->datosMesa[0]['cuenta'] ?>" placeholder="Cuenta" required></div><div class="form-group col-md-6"><label for="idcliente">Nombre de la Cuenta</label><input type="text" class="form-control" id="nombrecuenta" value="<?php echo $this->datosMesa[0]['nombrecuenta'] ?>" name="nombrecuenta" placeholder="Nombre de la cuenta" required></div></div>'; //New input field html 
+      var fieldLlevar = '<div id="mesa2" class="col-md-12 row"><div class="form-group col-md-6" data-select2-id="63"><label>Cliente</label><select class="form-control cmbbuscar select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true" name="idcliente" selected><option value="<?php echo $this->datosCliente[0]['idcliente'] ?>" selected disabled hidden><?php echo $this->datosCliente[0]['nombre'] ?></option><?php foreach ($this->clientes as $cliente) { ?> <option value=" <?php echo $cliente['idcliente'] ?>"><?php echo $cliente['nombre'] ?></option><?php } ?> </select></div>';
+      var x = 1;
+      var y = 1;
+      var max = 1;
+
+      //Once add button is clicked
+      $(Document).ready(function AgregarFila() {
+        <?php foreach($this->datosDetalle as $detalle){
+        ?>
+          $('#detallePedido > tbody:last-child')
+          .append('<tr id="2" ><td><input type="text" name="detallePedido[' + conteoDetallePedidos + '][producto]" class="form-control" placeholder="Escriba el nombre del producto" value="<?php echo $detalle['Nombre'] ?>" required></td><td><input type="number" step="1" name="detallePedido[' + conteoDetallePedidos + '][cantidad]" class="form-control" placeholder="Escriba la cantidad" value="<?php echo $detalle['Cantidad'] ?>" required></td><td><input type="number" name="detallePedido[' + conteoDetallePedidos + '][subproducto]" class="form-control" placeholder="Escriba el nombre del subproducto" value="<?php echo $detalle['subproducto'] ?>" required></td><td><input type="text" name="detallePedido[' + conteoDetallePedidos + '][notas]" class="form-control" placeholder="Escriba notas" required value="<?php echo $detalle['Notas'] ?>"></td><td><button class="btn btn-danger" type="button" onclick="EliminarFila(2)"><i class="text-white fas fa-backspace"></i></button></td></tr>');
+          conteoDetallePedidos++
+        <?php } ?>
+    })
+      $(cmbModalidad).ready(function() {
+        var cmbModalidadValor = cmbModalidad.options[cmbModalidad.selectedIndex].text; //Get initial value
+        console.log(cmbModalidadValor);
+        if (cmbModalidadValor == 'Mesa' && max <= 1) {
+          x++;
+          $(wrapper).append(fieldMesa);          
+          $('.cmbbuscar').select2();
+          $('.cmbbuscarMesa').select2();
+        }
+         else {
+          x == 0;
+          $('#mesa').remove();
+        }
+        if (cmbModalidadValor == 'Llevar' && max <= 1) {
+          x++;
+          $(wrapper).append(fieldLlevar);          
+          $('.cmbbuscar').select2();
+        }
+         else {
+          x == 0;
+          $('#mesa2').remove();
+        } //Add field html
+      });
+
+      $(cmbModalidad).change(function() {
+        var cmbModalidadValor = cmbModalidad.options[cmbModalidad.selectedIndex].text; //Get initial value
+        console.log(cmbModalidadValor);
+        if (cmbModalidadValor == 'Mesa' && max <= 1) {
+          x++;
+          $(wrapper).append(fieldMesa);          
+          $('.cmbbuscar').select2();
+        }
+         else {
+          x == 0;
+          $('#mesa').remove();
+        }
+        if (cmbModalidadValor == 'Llevar' && max <= 1) {
+          x++;
+          $(wrapper).append(fieldLlevar);          
+          $('.cmbbuscar').select2();
+        }
+         else {
+          x == 0;
+          $('#mesa2').remove();
+        } //Add field html
+      });
+    });
+  </script>

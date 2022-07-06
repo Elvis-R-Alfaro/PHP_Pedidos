@@ -29,10 +29,13 @@ class Pedidos extends Controlador{
             $this->vista->titulo = 'Nuevo pedido';
             $this->vista->url = 'pedidos/nuevo';
             $this->setModelo('pedidos');
-            $this->vista->datos = $this->modelo->listarMesas();
             $this->vista->clientes = $this->modelo->listarClientes();
             $this->vista->datos = $this->modelo->listarMeseros();
             $this->vista->estaciones = $this->modelo->listarEstaciones();
+            $this->setModelo('pedidosmesa');
+            $this->vista->mesas = $this->modelo->listarMesa();
+            $this->setModelo('detallepedidos');
+            $this->vista->productos = $this->modelo->listarProductos();
             $this->vista->render('pedidos/nuevo');
         }
         else{
@@ -53,6 +56,39 @@ class Pedidos extends Controlador{
                 $id = $_GET['id'];
                 $this->setModelo('pedidos');
                 $this->vista->datos = $this->modelo->buscarId($id);
+                $this->vista->clientes = $this->modelo->listarClientes();
+                $this->vista->meseros = $this->modelo->listarMeseros();
+                $this->vista->estaciones = $this->modelo->listarEstaciones();
+                $this->setModelo('pedidosmesa');
+                $this->vista->mesas = $this->modelo->listarMesa();
+                if($this->vista->datos[0]['modalidad']=='ME'){
+                    $this->vista->datosMesa = $this->modelo->buscarIdPedido($id);
+                    $this->vista->datosCliente[0]['idcliente'] = 0;
+                    $this->vista->datosCliente[0]['nombre'] = 'Seleccione un valor';
+                }
+                else if($this->vista->datos[0]['modalidad']=='LL'){
+                    $this->vista->datosMesa[0]['idmesa'] = 0;
+                    $this->vista->datosMesa[0]['Mesa'] = 'Seleccione un valor';
+                    $this->vista->datosMesa[0]['cuenta'] = "";
+                    $this->vista->datosMesa[0]['nombrecuenta'] = "";
+                    $this->setModelo('pedidosllevar');
+                    $this->vista->datosCliente = $this->modelo->buscarIdPedido($id);
+                }
+                else{
+                    $this->vista->datosCliente[0]['idcliente'] = 0;
+                    $this->vista->datosCliente[0]['nombre'] = 'Seleccione un valor';
+                    $this->vista->datosMesa[0]['idmesa'] = 0;
+                    $this->vista->datosMesa[0]['Mesa'] = 'Seleccione un valor';
+                    $this->vista->datosMesa[0]['cuenta'] = "";
+                    $this->vista->datosMesa[0]['nombrecuenta'] = "";
+                    $this->setModelo('pedidosllevar');
+                }
+                /* $this->vista->datosMesa = $this->modelo->buscarIdPedido($id);
+                $this->setModelo('pedidosllevar');
+                $this->vista->datosCliente = $this->modelo->buscarIdPedido($id); */
+                $this->setModelo('detallepedidos');
+                $this->vista->datosDetalle = $this->modelo->buscarIdPedido($id);
+
                 $this->vista->render('pedidos/buscarId');
             } catch (\Throwable $th) {
                 var_dump($th); 
@@ -95,24 +131,14 @@ class Pedidos extends Controlador{
 
     function guardar(){
         try {
-            $arregloDetallePedido = $_POST['detallePedido'];
-            foreach($arregloDetallePedido as $item){
-                echo $item["producto"];
-                echo '<br>';
-                echo $item["cantidad"];
-                echo '<br>';
-                echo $item["subproducto"];
-                echo '<br>';
-                echo $item["notas"];
-                echo '<br>';
-            }
-            
+            $arregloDetallePedido = $_POST['detallePedido'];           
             
             $idmesero = $_POST['idmesero'];
             $fechahora = date('Y-m-d H:i:s',time());
             $Estacion = $_POST['Estacion'];
             $activo = $_POST['activo'];
-            $modalidad = $_POST['modalidad'];  
+            $modalidad = $_POST['modalidad'];
+            
             $elaborado = isset($_POST['elaborado'])? 'S':'N';
             $entregado = isset($_POST['entregado'])? 'S':'N';
             $facturado = isset($_POST['facturado'])? 'S':'N';
@@ -123,6 +149,18 @@ class Pedidos extends Controlador{
             $this -> setModelo('detallepedidos');
             echo "Ultimo".$ultimoId;
             $this -> modelo -> insertBulk($arregloDetallePedido,$ultimoId);
+            if($modalidad == 'ME'){
+                $idmesa = $_POST['idmesa'];
+                $cuenta = $_POST['cuenta'];
+                $nombrecuenta = $_POST['nombrecuenta'];
+                $this->setModelo('pedidosmesa');
+                $this->modelo->insert(["idpedido"=>$ultimoId, "idmesa"=>$idmesa, "cuenta"=>$cuenta,"nombrecuenta"=>$nombrecuenta,]);
+            }
+            else if($modalidad == 'LL'){
+                $idcliente = $_POST['idcliente'];
+                $this -> setModelo('pedidosLlevar');
+                $this -> modelo -> insert(['idpedido' => $ultimoId, 'idcliente' => $idcliente]);
+            }
             header('Location: /pedidos', true, 301);
             exit();
         } catch (\Throwable $th) {
@@ -132,7 +170,14 @@ class Pedidos extends Controlador{
 
     function actualizar(){
         try {
+            
             $id = $_GET['id'];
+            
+            $arregloDetallePedido = $_POST['detallePedido'];  
+            $this -> setModelo('detallepedidos');            
+            $this -> modelo -> DeleteAllNumeroPedido($id);
+            $this -> modelo -> insertBulk($arregloDetallePedido,$id);
+            /*  
             $idmesero = $_POST['idmesero'];
             $fechahora = date('Y-m-d H:i:s',time());
             $Estacion = $_POST['Estacion'];
@@ -140,7 +185,7 @@ class Pedidos extends Controlador{
             $modalidad = $_POST['modalidad'];
             $estado = $_POST['estado'];
             $this -> setModelo('pedidos');
-            $this -> modelo -> update([ 'id' => $id ,'idmesero' => $idmesero, 'fechahora' => $fechahora, 'Estacion' => $Estacion, 'activo' => $activo, 'modalidad' => $modalidad, 'estado' => $estado]);
+            $this -> modelo -> update([ 'id' => $id ,'idmesero' => $idmesero, 'fechahora' => $fechahora, 'Estacion' => $Estacion, 'activo' => $activo, 'modalidad' => $modalidad, 'estado' => $estado]); */
             header('Location: /pedidos', true, 301);
             exit();
         } catch (\Throwable $th) {

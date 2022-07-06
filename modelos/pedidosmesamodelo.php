@@ -67,8 +67,7 @@ class pedidosmesaModelo extends Modelo{
             foreach ($query as $row) {
                 $mesas =[
                     'Mesa' => $row['Mesa'],
-                    'idregistro' => $row['idregistro'],
-                    
+                    'idregistro' => $row['idregistro'],                   
                     
                 ];
                 array_push($lista,$mesas);
@@ -132,6 +131,29 @@ class pedidosmesaModelo extends Modelo{
         try {
             $sql = 'select pedidos_mesa.*, mesas_x_area.Mesa from pedidos_mesa join mesas_x_area
             on pedidos_mesa.idmesa = mesas_x_area.idregistro where pedidos_mesa.idregistro = '.$id;
+            $query = $this->db->conectar()->query($sql);
+            foreach($query as $row){
+                $pedidomesa_listar = [
+                    'idpedido'=>$row['idpedido'],
+                    'idmesa'=>$row['idmesa'],
+                    'cuenta'=>$row['cuenta'],
+                    'nombrecuenta'=>$row['nombrecuenta'],
+                    'idregistro'=>$row['idregistro'],
+                    'Mesa'=>$row['Mesa']
+                ];
+                array_push($lista, $pedidomesa_listar);
+            }
+            return $lista;
+        } catch (\Throwable $th) {
+            var_dump($th);
+        }
+    }
+
+    public function buscarIdPedido($id){
+        $lista = [];
+        try {
+            $sql = 'select pedidos_mesa.*, mesas_x_area.Mesa from pedidos_mesa join mesas_x_area
+            on pedidos_mesa.idmesa = mesas_x_area.idregistro where pedidos_mesa.idpedido = '.$id;
             $query = $this->db->conectar()->query($sql);
             foreach($query as $row){
                 $pedidomesa_listar = [

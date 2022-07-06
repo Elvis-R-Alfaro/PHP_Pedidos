@@ -136,4 +136,26 @@ class PedidosLLevarModelo extends Modelo{
         }
     }
 
+    public function buscarIdPedido($id){
+        $lista=[];
+        try {
+            $sql = 'select pedidos_llevar.*, clientes.nombre from pedidos_llevar join clientes 
+            on pedidos_llevar.idcliente = clientes.idcliente where pedidos_llevar.idpedido = '.$id;
+            $query = $this->db->conectar()->query($sql);
+            foreach ($query as $row) {
+                $pedido_listar =[
+                    'nombre' => $row['nombre'],
+                    'id' => $row['idregistro'],
+                    'idpedido' => $row['idpedido'],
+                    'idcliente' => $row['idcliente']
+                    
+                ];
+                array_push($lista,$pedido_listar);
+            }
+            return $lista;
+        } catch (\Throwable $th) {
+            var_dump($th);
+        }
+    }
+
 }
