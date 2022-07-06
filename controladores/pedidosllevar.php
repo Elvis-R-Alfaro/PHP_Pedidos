@@ -9,16 +9,31 @@ class PedidosLlevar extends Controlador{
         //echo "<h2>Controlador de inicio</h2>";
     }
     function inicio(){
+        session_start(); 
+        if(isset($_SESSION['usuario'])){ 
         $this->vista->titulo = 'Pedidos Llevar';
         $this->vista->url = 'pedidosllevar';
         $this->setModelo('pedidosLlevar');
         $this->vista->datos = $this->modelo->listar();
         $this->vista->render('pedidosllevar/index');
     }
+    else{
+        header('Location: /inicio');
+    } 
+    }
     function nuevo(){
+        session_start(); 
+        if(isset($_SESSION['usuario'])){ 
         $this->vista->titulo = 'Nuevo pedido a llevar';
         $this->vista->url = 'pedidosllevar/nuevo';
+        $this->setModelo('pedidosLlevar');
+        $this->vista->clientes = $this->modelo->listarClientes();
+        $this->vista->pedidos = $this->modelo->listarPedidos();
         $this->vista->render('pedidosllevar/nuevo');
+    }
+    else{
+        header('Location: /inicio');
+    } 
     }
 
     function listar() {
@@ -27,13 +42,43 @@ class PedidosLlevar extends Controlador{
     }
 
     function buscarId() {
+        session_start(); 
+        if(isset($_SESSION['usuario'])){ 
         try {
+
             $id = $_GET['id'];
             $this->setModelo('pedidosLlevar');
             $this->vista->datos = $this->modelo->buscarId($id);
+            $this->vista->clientes = $this->modelo->listarClientes();
+            $this->vista->pedidos = $this->modelo->listarPedidos();
             $this->vista->render('pedidosllevar/buscarId');
         } catch (\Throwable $th) {
             var_dump($th); 
+        }
+    }
+    else{
+        header('Location: /inicio');
+    } 
+    }
+
+
+    function buscar(){
+        session_start(); 
+        if(isset($_SESSION['usuario'])){ 
+            try {
+                isset($_POST['filtro']) ? $filtro = $_POST['filtro'] : $filtro = '';
+                isset($_POST['buscar']) ? $buscar = $_POST['buscar'] : $buscar = '';
+                $this->vista->titulo = 'Buscar pedido a llevar';
+                $this->vista->url = 'pedidosllevar/buscar';
+                $this->setModelo('pedidosllevar');
+                $this->vista->datos = $this->modelo->listarResultados($filtro,$buscar,1);
+                $this->vista->render('pedidosllevar/buscar');            
+            } catch (\Throwable $th) {
+                var_dump($th);
+            }
+        }
+        else{
+            header('Location: /inicio');
         }
     }
 

@@ -26,7 +26,7 @@
                       <tr>
                         <th>ID REGISTRO</th>
                         <th>ID PEDIDO</th>
-                        <th>ID CLIENTE</th>
+                        <th>CLIENTE</th>
                       </tr>
                       </thead>
                       <tbody>
@@ -34,7 +34,7 @@
                         <tr>
                           <td><a href="/pedidosllevar/buscarId?id=<?php echo $row['idregistro']; ?>"><?php echo $row['idregistro']; ?></a></td>
                           <td><?php echo $row['idpedido']; ?></td>
-                          <td><?php echo $row['idcliente']; ?></td>
+                          <td><?php echo $row['nombre']; ?></td>
                           <td>
                             <a class="btn btn-warning" href="/pedidosllevar/buscarId?id=<?php echo $row['idregistro']; ?>">Editar</a>
                             <a class="btn btn-danger" onclick = "return confirm('Estas seguro de eliminar?')"
@@ -50,7 +50,7 @@
                 <!-- /.card-body -->
                 <div class="card-footer clearfix">
                   <a href="/pedidosllevar/nuevo" class="btn btn-sm btn-info float-left">nuevo pedido</a>
-                  <a href="javascript:void(0)" class="btn btn-sm btn-secondary float-right">Buscar pedido</a>
+                  <a href="/pedidosllevar/buscar" class="btn btn-sm btn-secondary float-right">Buscar pedido</a>
                 </div>
                 <!-- /.card-footer -->
               </div>
