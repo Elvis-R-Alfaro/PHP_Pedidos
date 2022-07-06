@@ -36,7 +36,7 @@
                         <tr>
                           <td><a href="/pedidosmesa/buscarId?id=<?php echo $row['idregistro']; ?>"><?php echo $row['idregistro']; ?></a></td>
                           <td><?php echo $row['idpedido']; ?></td>
-                          <td><?php echo $row['mesa']; ?></td>
+                          <td><?php echo $row['Mesa']; ?></td>
                           <td><?php echo $row['cuenta']?></td>
                           <td><?php echo $row['nombrecuenta']?></td>
                           <td>
@@ -53,8 +53,8 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer clearfix">
-                  <a href="/pedidosllevar/nuevo" class="btn btn-sm btn-info float-left">nuevo pedido</a>
-                  <a href="/pedidosllevar/buscar" class="btn btn-sm btn-secondary float-right">Buscar pedido</a>
+                  <a href="/pedidosmesa/nuevo" class="btn btn-sm btn-info float-left">nuevo pedido</a>
+                  <a href="/pedidosmesa/buscar" class="btn btn-sm btn-secondary float-right">Buscar pedido</a>
                 </div>
                 <!-- /.card-footer -->
               </div>
