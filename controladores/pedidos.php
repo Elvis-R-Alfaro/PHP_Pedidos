@@ -29,6 +29,7 @@ class Pedidos extends Controlador{
             $this->vista->titulo = 'Nuevo pedido';
             $this->vista->url = 'pedidos/nuevo';
             $this->setModelo('pedidos');
+            $this->vista->datos = $this->modelo->listarMesas();
             $this->vista->clientes = $this->modelo->listarClientes();
             $this->vista->datos = $this->modelo->listarMeseros();
             $this->vista->estaciones = $this->modelo->listarEstaciones();
@@ -94,7 +95,8 @@ class Pedidos extends Controlador{
 
     function guardar(){
         try {
-            foreach($_POST['detallePedido'] as $item){
+            $arregloDetallePedido = $_POST['detallePedido'];
+            foreach($arregloDetallePedido as $item){
                 echo $item["producto"];
                 echo '<br>';
                 echo $item["cantidad"];
@@ -104,8 +106,9 @@ class Pedidos extends Controlador{
                 echo $item["notas"];
                 echo '<br>';
             }
-            print_r($_POST['detallePedido']=array('producto','cantidad','subproducto','notas'));
-            /* $idmesero = $_POST['idmesero'];
+            
+            
+            $idmesero = $_POST['idmesero'];
             $fechahora = date('Y-m-d H:i:s',time());
             $Estacion = $_POST['Estacion'];
             $activo = $_POST['activo'];
@@ -116,9 +119,12 @@ class Pedidos extends Controlador{
             $estado =$elaborado.$entregado.$facturado;
             
             $this -> setModelo('pedidos');
-            $this -> modelo -> insert(['idmesero' => $idmesero, 'fechahora' => $fechahora, 'Estacion' => $Estacion, 'activo' => $activo, 'modalidad' => $modalidad, 'estado' => $estado]);
+            $ultimoId=$this -> modelo -> insert(['idmesero' => $idmesero, 'fechahora' => $fechahora, 'Estacion' => $Estacion, 'activo' => $activo, 'modalidad' => $modalidad, 'estado' => $estado]);
+            $this -> setModelo('detallepedidos');
+            echo "Ultimo".$ultimoId;
+            $this -> modelo -> insertBulk($arregloDetallePedido,$ultimoId);
             header('Location: /pedidos', true, 301);
-            exit() */;
+            exit();
         } catch (\Throwable $th) {
             var_dump($th); //tirar error y para la ejecusion del programa
         }

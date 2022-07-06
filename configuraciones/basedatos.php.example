@@ -10,7 +10,7 @@ class BaseDatos{
 
     public function __construct(){
         $this -> host = 'localhost';
-        $this -> db = 'sigre2';
+        $this -> db = 'sigresdesarrollo';
         $this -> usuario = 'root';
         $this -> contrasena = '';
         $this -> caracteres = 'utf8';
@@ -22,6 +22,7 @@ class BaseDatos{
             $opciones = [
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
                 PDO::ATTR_EMULATE_PREPARES => false,
+
             ];
             $pdo = new PDO($this->conexion, $this -> usuario, $this -> contrasena, $opciones);
             return $pdo;
@@ -29,6 +30,9 @@ class BaseDatos{
             print_r('Error con la conexión: '.$e -> getMessage());
         }
     }
+
+    function desconectar(){
+        $this->conexion = null;
+    }
     
 }
-

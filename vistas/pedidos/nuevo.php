@@ -59,12 +59,12 @@
                   <div class="form-group col-md-6">
                     <label for="activo">Estado</label>
                     <select class="form-control" id="activo" name="activo" placeholder="Activo">
-                      <option value="1" default>Activo</option>
-                      <option value="0">Inactivo</option>
+                      <option value="1" default>Pendiente</option>
+                      <option value="0">Finalizado</option>
                     </select>
                   </div>
                   <div id="field_wrapper" class="col-md-12">
-                  <div class="form-group col-md-6"><label>Cliente</label><select class="form-control cmbbuscar select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true"><option value="" selected disabled hidden>Seleccione un valor</option><?php foreach ($this->clientes as $cliente) { ?> <option value=" <?php echo $cliente['idcliente'] ?>"><?php echo $cliente['nombre'] ?></option><?php } ?> </select></div>                    
+                  <!-- <div class="form-group col-md-6"><label>Cliente</label><select class="form-control cmbbuscar select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true"><option value="" selected disabled hidden>Seleccione un valor</option><?php foreach ($this->clientes as $cliente) { ?> <option value=" <?php echo $cliente['idcliente'] ?>"><?php echo $cliente['nombre'] ?></option><?php } ?> </select></div>                     -->
                   </div>
                   <div class="form-group col-md-6">
                     <label for="fechahora">Estado del Pedido</label>
@@ -131,7 +131,7 @@
 
     function AgregarFila() {
       $('#detallePedido > tbody:last-child')
-        .append('<tr id="2" ><td><input type="text" name="detallePedido[' + conteoDetallePedidos + '][producto]" class="form-control" placeholder="Escriba el nombre del producto" required></td><td><input type="number" step="1" name="detallePedido[' + conteoDetallePedidos + '][cantidad]" class="form-control" placeholder="Escriba la cantidad" required></td><td><input type="text" name="detallePedido[' + conteoDetallePedidos + '][subproducto]" class="form-control" placeholder="Escriba el nombre del subproducto" required></td><td><input type="text" name="detallePedido[' + conteoDetallePedidos + '][notas]" class="form-control" placeholder="Escriba notas" required></td><td><button type="button" onclick="EliminarFila(2)">A</button></td></tr>');
+        .append('<tr id="2" ><td><input type="text" name="detallePedido[' + conteoDetallePedidos + '][producto]" class="form-control" placeholder="Escriba el nombre del producto" required></td><td><input type="number" step="1" name="detallePedido[' + conteoDetallePedidos + '][cantidad]" class="form-control" placeholder="Escriba la cantidad" required></td><td><input type="number" name="detallePedido[' + conteoDetallePedidos + '][subproducto]" class="form-control" placeholder="Escriba el nombre del subproducto" required></td><td><input type="text" name="detallePedido[' + conteoDetallePedidos + '][notas]" class="form-control" placeholder="Escriba notas" required></td><td><button type="button" onclick="EliminarFila(2)">A</button></td></tr>');
       conteoDetallePedidos++
     }
 
@@ -140,7 +140,7 @@
     }
 
     $(document).ready(function() {
-      $('.cmbbuscar').select2();
+      
     });
 
 
@@ -148,7 +148,7 @@
     $(document).ready(function() {
       var cmbModalidad = document.getElementById('modalidad'); //Add button selector
       var wrapper = $('#field_wrapper'); //Input field wrapper
-      var fieldHTML = '<div id="mesa" class="col-md-12 row"><div class="form-group col-md-6"><label>Cliente</label><select class="form-control cmbbuscar select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true"><option value="" selected disabled hidden>Seleccione un valor</option><?php foreach ($this->clientes as $cliente) { ?> <option value=" <?php echo $cliente['idcliente'] ?>"><?php echo $cliente['nombre'] ?></option><?php } ?> </select></div><div class="form-group col-md-6" id="idmesa"><label for="activo">Mesa</label><select class="form-control" id="activo" name="activo" placeholder="Activo"><option value="1" default>Activo</option><option value="0">Inactivo</option></select></div><div class="form-group col-md-6"><label for="idpedido">Id Pedido</label><input type="text" class="form-control" id="idpedido" name="idpedido" placeholder="Id Pedido" required></div><div class="form-group col-md-6"><label for="idcliente">Id Cliente</label><input type="text" class="form-control" id="idcliente" name="idcliente" placeholder="Id Cliente" required></div></div>'; //New input field html 
+      var fieldHTML = '<div id="mesa" class="col-md-12 row"><div class="form-group col-md-6" data-select2-id="63"><label>Cliente</label><select class="form-control cmbbuscar select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true"><option value="" selected disabled hidden>Seleccione un valor</option><?php foreach ($this->clientes as $cliente) { ?> <option value=" <?php echo $cliente['idcliente'] ?>"><?php echo $cliente['nombre'] ?></option><?php } ?> </select></div><div class="form-group col-md-6" id="idmesa"><label for="activo">Mesa</label><select class="form-control" id="activo" name="activo" placeholder="Activo"><option value="1" default>Activo</option><option value="0">Inactivo</option></select></div><div class="form-group col-md-6"><label for="idpedido">Cuenta</label><input type="text" class="form-control" id="cuenta" name="cuenta" placeholder="Cuenta" required></div><div class="form-group col-md-6"><label for="idcliente">Nombre de la Cuenta</label><input type="text" class="form-control" id="idcliente" name="nombrecuenta" placeholder="Nombre de la cuenta" required></div></div>'; //New input field html 
       var x = 1;
       var max = 1;
 
@@ -159,7 +159,8 @@
         if (cmbModalidadValor == 'Mesa' && max <= 1) {
           x++;
           console.log("hola2");
-          $(wrapper).append(fieldHTML);
+          $(wrapper).append(fieldHTML);          
+          $('.cmbbuscar').select2();
         } else {
           x == 0;
           $('#mesa').remove();

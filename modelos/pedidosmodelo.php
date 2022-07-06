@@ -6,8 +6,25 @@ class PedidosModelo extends Modelo{
     }
 
     public function insert($datos){
-        $query = $this-> db-> conectar()-> prepare('INSERT INTO pedidos(idmesero, fechahora, Estacion, activo, modalidad, estado) VALUES (:idmesero, :fechahora, :Estacion, :activo, :modalidad, :estado)');
-        $query->execute($datos);
+        try {
+            $opciones = [
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_EMULATE_PREPARES => false,
+            ];
+            $pdo = new PDO("mysql:host=localhost;dbname=sigresdesarrollo;charset=utf8", "root", "", $opciones);
+            
+            $query = $pdo->prepare('INSERT INTO pedidos(idmesero, fechahora, Estacion, activo, modalidad, estado) VALUES (:idmesero, :fechahora, :Estacion, :activo, :modalidad, :estado)');
+            $query->execute($datos);
+            $id = $pdo->lastInsertId();
+            
+            return $id;
+            //code...
+        } catch (\Throwable $th) {
+            return $th;
+        }
+        //return last id
+
+        
     }
 
     public function update($datos){
@@ -130,6 +147,7 @@ class PedidosModelo extends Modelo{
             var_dump($th);
         }
     }
+
 
     public function listarEstaciones(){
         $lista=[];
