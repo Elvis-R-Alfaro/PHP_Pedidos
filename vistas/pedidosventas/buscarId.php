@@ -16,19 +16,20 @@
           <!-- jquery validation -->
           <div class="card card-primary">
             <div class="card-header">
-              <h3 class="card-title">Datos generales <small>Pedidos</small></h3>
+              <h3 class="card-title">Datos generales <small>Pedidos y Ventas</small></h3>
             </div>
             <!-- /.card-header -->
             <!-- form start -->
-            <form id="quickForm" action="/pedidosllevar/actualizar?id=<?php echo $this->datos[0]['id'] ?>" method="post">
+            <form id="quickForm" action="/pedidosventas/actualizar?id=<?php echo $this->datos[0]['id'] ?>" method="post">
               <div class="card-body">
                 <div class="form-row">
                   <div class="form-group col-md-6">
-                    <label for="idpedido">Id Pedido</label>
-                    <select class="form-control cmbbuscar select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true" name="idpedido" required> 
-                    <option value=" <?php echo $this-> datos[0]['idpedido'] ?>"><?php echo $this-> datos[0]['idpedido'] ?></option>
+                    <label for="NumeroPedido"> Numero pedido</label>
+
+                    <select class="form-control" id="NumeroPedido" name="NumeroPedido" required>
+                      <option value=" <?php echo $this->datos[0]['NumeroPedido'] ?>" selected disabled hidden><?php echo $this->datos[0]['NumeroPedido'] ?></option>
                       <?php
-                      foreach ($this->pedidos as $pedido) { ?>
+                      foreach ($this->facturas as $pedido) { ?>
                         <option value=" <?php echo $pedido['NumeroPedido'] ?>"><?php echo $pedido['NumeroPedido'] ?></option>
                       <?php
                       }
@@ -36,22 +37,13 @@
                     </select>
                   </div>
                   <div class="form-group col-md-6">
-                    <label for="idcliente">Id cliente</label>
-
-                    <select class="form-control cmbbuscar select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="2" tabindex="-1" aria-hidden="true" name="idcliente"  required>
-                      <option value="<?php echo $this-> datos[0]['idcliente'] ?>"><?php echo $this->datos[0]['nombre'] ?></option>
-                      <?php
-                      foreach ($this->clientes as $cliente) { ?>
-                        <option value=" <?php echo $cliente['idcliente'] ?>"><?php echo $cliente['nombre'] ?></option>
-                      <?php
-                      }
-                      ?>
-                    </select>
+                  <label for="Nombre">Descripcion</label>
+                   <input type="text" value="<?php echo $this->facturas[0]['Nombre'] ?>" class="form-control" id="Nombre">
                   </div>
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <button name="submit" type="submit" class="btn btn-primary toastrDefaultSuccess">Actualizar</button>
+                  <button type="submit" class="btn btn-primary toastrDefaultSuccess">Actualizar</button>
                 </div>
             </form>
           </div>
@@ -74,15 +66,3 @@
   <script src="/public/plugins/jquery-validation/jquery.validate.min.js"></script>
   <script src="/public/plugins/jquery-validation/additional-methods.min.js"></script>
   <?php include 'vistas/plantilla/script.php'; ?>
-
-  <script>
-
-$(document).ready(function() {
-      $('.cmbbuscar').select2();
-    });
-
-    $(document).ready(function() {
-      $('.cmbbuscar2').select2();
-    });
-
-</script>

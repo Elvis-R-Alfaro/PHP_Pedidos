@@ -8,6 +8,8 @@ class Inicio extends Controlador{
         //echo "<h2>Controlador de inicio</h2>";
     }
     function inicio(){
+        
+        
         session_start();
         if(isset($_SESSION['usuario'])){
             header('Location: /pedidos');

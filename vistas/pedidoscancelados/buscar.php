@@ -1,4 +1,3 @@
-
 <?php include 'vistas/plantilla/encabezado.php'; ?>
 <div class="wrapper">
     <?php
@@ -20,11 +19,11 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-8 offset-md-2">
-                    <form action="/pedidosventas/buscar" method="post">
+                    <form action="/pedidoscancelados/buscar" method="post">
                         <div class="input-group input-group-lg">
                             <select class="" id="filtro" name="filtro">
-                                <option value="pedidos_x_ventas.NumeroFactura">N° Factura</option>
-                                <option value="productos.Nombre">Nombre</option>
+                                <option value="pedidos_cancelados.numeropedido">N° pedido</option>
+                                <option value="usuarios.LoginUsuario">Usuario</option>
                             </select>
                             <input type="search" id="buscar" name="buscar" class="form-control form-control-lg" placeholder="Buscar" value="">
                             <div class="input-group-append">
@@ -42,9 +41,9 @@
                     <table class="table m-0">
                         <thead>
                             <tr>
-                                <th>N° Factura</th>
                                 <th>N° PEDIDO</th>
-                                <th>DESCRIPCION</th>
+                                <th>USUARIO</th>
+                                <th>FECHA</th>
                                 <!-- <th>ESTADO</th> -->
                             </tr>
                         </thead>
@@ -52,12 +51,12 @@
                             <?php foreach ($this->datos as $row) { ?>
 
                                 <tr>
-                                    <td><a href="/pedidosventas/buscarId?id=<?php echo $row['NumeroFactura']; ?>"><?php echo $row['NumeroFactura']; ?></a></td>
-                                    <td><?php echo $row['NumeroPedido']; ?></td>
-                                    <td><?php echo $row['Nombre']; ?></td>
+                                    <td><a href="/pedidoscancelados/buscarid?id=<?php echo $row['numeropedido']; ?>"><?php echo $row['numeropedido']; ?></a></td>
+                                    <td><?php echo $row['LoginUsuario']; ?></td>
+                                    <td><?php echo $row['fechahora']; ?></td>
                                     <td>
-                                        <a class="btn btn-warning" href="/pedidosventas/buscarId?id=<?php echo $row['NumeroFactura']; ?>">Editar</a>
-                                        <a class="btn btn-danger" onclick="return confirm('Estas seguro de eliminar?')" href="/pedidosventas/eliminar?id=<?php echo $row['NumeroFactura']; ?>">Eliminar</a>
+                                        <a class="btn btn-warning" href="/pedidoscancelados/buscarid?id=<?php echo $row['numeropedido']; ?>">Editar</a>
+                                        <a class="btn btn-danger" onclick="return confirm('Estas seguro de eliminar?')" href="/pedidoscancelados/eliminar?id=<?php echo $row['numeropedido']; ?>">Eliminar</a>
                                     </td>
                                 </tr>
 

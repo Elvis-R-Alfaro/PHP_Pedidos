@@ -19,7 +19,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-8 offset-md-2">
-                    <form action="/pedidos/buscar" method="post">
+                    <form action="/pedidos1/buscar" method="post">
                         <div class="input-group input-group-lg">
                             <select class="" id="filtro" name="filtro">
                                 <option value="pedidos.NumeroPedido">N° Pedido</option>
@@ -55,7 +55,7 @@
                         <tbody>
                             <?php foreach ($this->datos as $row) { ?>
                                 <tr>
-                                    <td><a href="/pedidos/buscarId?id=<?php echo $row['NumeroPedido']; ?>"><?php echo $row['NumeroPedido']; ?></a></td>
+                                    <td><a href="/pedidos1/buscarId?id=<?php echo $row['NumeroPedido']; ?>"><?php echo $row['NumeroPedido']; ?></a></td>
                                     <td><?php echo $row['nombremesero']; ?></td>
                                     <td><?php echo $row['fechahora']; ?></td>
                                     <td><?php echo $row['nombreestacion']; ?></td>
@@ -76,8 +76,8 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <a class="btn btn-warning" href="/pedidos/buscarId?id=<?php echo $row['NumeroPedido']; ?>"><i class="text-white fas fa-edit"></i></a>
-                                        <a class="btn btn-danger" onclick="return confirm('Estas seguro de cancelar?')" href="/pedidos/eliminar?id=<?php echo $row['NumeroPedido']; ?>"><i class="text-white fas fa-window-close"></i></a>
+                                        <a class="btn btn-warning" href="/pedidos1/buscarId?id=<?php echo $row['NumeroPedido']; ?>">Editar</a>
+                                        <a class="btn btn-danger" onclick="return confirm('Estas seguro de eliminar?')" href="/pedidos1/eliminar?id=<?php echo $row['NumeroPedido']; ?>">Eliminar</a>
                                     </td>
                                 </tr>
                             <?php  } ?>

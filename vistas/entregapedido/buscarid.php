@@ -5,11 +5,6 @@
         require 'vistas/plantilla/menulateral.php';
         require 'vistas/plantilla/contenidotitulo.php';
     ?>
-<?php
-$n1=10;
-$n2=20;
-$r=$n1+$n2;
-?>
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
@@ -19,28 +14,32 @@ $r=$n1+$n2;
             <!-- jquery validation -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Datos generales <small>Cargos de empleados</small></h3>
+                <h3 class="card-title">Datos generales <small>Entrega Pedido</small></h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form id="quickForm" action="/pedidoscancelados/borrar?id=<?php echo $this->datos[0]['numeropedido'] ?>" method="post">
+              <form id="quickForm" >
                 <div class="card-body">
                   <div class="form-group">
-                    <label for="inputNombre">Numero de pedido</label>
-                    <input type="text" name="nombre" class="form-control" id="inputNombre"  value='<?php echo $this->datos[0]['numeropedido'] ?>' >
+                    <label for="inputNombre">Id Detalle Pedidos</label>
+                    <input type="number" class="form-control" readonly value="<?php echo strval($this->datos[0]['iddetalle_pedido']);?>" >
                   </div>
                   <div class="form-group">
-                    <label for="textareaDescricion">Id del usuario</label>
-                    <input name="descripcion" class="form-control" id="textareaDescricion"  value='<?php echo $this->datos[0]['usuario'] ?>'>
+                    <label for="textareaDescricion">Usuario</label>
+                    <input type="text"class="form-control" readonly value="<?php echo $this->datos[0]['loginusuario'];?>">
                   </div>
                   <div class="form-group">
-                    <label for="textareaDescricion">Fecha</label>
-                    <input name="descripcion" class="form-control" id="textareaDescricion"  value='<?php echo $this->datos[0]['fechahora'] ?>'>
+                    <label for="textareaDescricion">Fecha Hora</label>
+                    <input type="text" class="form-control" readonly value=" <?php echo strval($this->datos[0]['fechahora']);?>">
+                  </div>
+                  <div class="form-group">
+                    <label for="textareaDescricion">Id Entrega</label>
+                    <input type="text" class="form-control" readonly value=" <?php echo strval($this->datos[0]['identrega']);?>">
                   </div>
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-danger toastrDefaultSuccess">Eliminar</button>
+                  <!-- <button type="submit" class="btn btn-primary toastrDefaultSuccess">Guardar</button> -->
                 </div>
               </form>
             </div>

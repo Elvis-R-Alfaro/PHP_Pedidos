@@ -24,37 +24,47 @@
                   <label for="inputNombre">Numero Pedido</label>
                   <input type="number" name="numeropedidos" class="form-control" id="inputNombre" placeholder="Escriba el nombre del cargo" required>
                 </div>
-                <div class="form-group col-md-6">
-                  <label for="inputNombre">Codigo Producto</label>
-                  <input type="text" name="codigoproducto" class="form-control" id="inputNombre" placeholder="Escriba el nombre del cargo" required>
+                <div class="form-group col-md-6" data-select2-id="63">
+                  <label>Producto</label>
+                  <select class="form-control cmbBuscarProducto select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true" name="codigoproducto">
+                    <option value="" selected disabled hidden>Seleccione un valor</option>
+                    <?php foreach ($this->productos as $producto) { ?> 
+                      <option value="<?php echo $producto['codigo'] ?>"><?php echo $producto['nombre'] ?></option>
+                    <?php } ?>
+                  </select>
                 </div>
                 <div class="form-group col-md-6">
                   <label for="inputNombre">Cantidad</label>
-                  <input type="text" name="cantidad" class="form-control" id="inputNombre" placeholder="Escriba el nombre del cargo" required>
+                  <input type="number" min="0" step="1" name="cantidad" class="form-control" id="inputNombre" placeholder="Escriba el nombre del cargo" required>
                 </div>
                 <div class="form-group col-md-6">
-                  <label for="inputNombre">subproducto</label>
-                  <input type="text" name="subproducto" class="form-control" id="inputNombre" placeholder="Escriba el nombre del cargo" required>
+                  <label>SubProducto</label>
+                  <select class="form-control cmbBuscarSubProducto select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="2" tabindex="-1" aria-hidden="true" name="subproducto">
+                    <option value="" selected disabled hidden>Seleccione un valor</option>
+                    <?php foreach ($this->productos as $producto) { ?> 
+                      <option value="<?php echo $producto['codigo'] ?>"><?php echo $producto['nombre'] ?></option>
+                    <?php } ?>
+                  </select>
                 </div>
                 <div class="form-group col-md-12">
                   <label for="inputNombre">Notas</label>
-                  <input type="text" name="notas" class="form-control" id="inputNombre" placeholder="Escriba el nombre del cargo" required>
+                  <input type="text" name="notas" class="form-control" id="inputNombre" placeholder="Escriba el nombre del cargo">
                 </div>
-                <div class="form-group col-md-3">
-                  <label for="inputNombre">Cancelado</label>
-                  <input type="number" step="1" name="cancelado" class="form-control" id="inputNombre" placeholder="Escriba el nombre del cargo" required>
+                <div class="col-md-3 text-center custom-control custom-switch custom-switch-off-danger custom-switch-on-success ">
+                  <input type="checkbox" class="custom-control-input" name="cancelado" id="cancelado" value="0" control-id="ControlID-41">
+                  <label class="custom-control-label" for="cancelado" id="cancelado">Cancelado</label>
                 </div>
-                <div class="form-group col-md-3">
-                  <label for="inputNombre">Elaborado</label>
-                  <input type="number" step="1" name="elaborado" class="form-control" id="inputNombre" placeholder="Escriba el nombre del cargo" required>
+                <div class="col-md-3 text-center custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
+                  <input type="checkbox" class="custom-control-input" name="elaborado" id="elaborado" value="0" control-id="ControlID-42">
+                  <label class="custom-control-label" for="elaborado" id="elaborado">Elaborado</label>
                 </div>
-                <div class="form-group col-md-3">
-                  <label for="inputNombre">Entregado</label>
-                  <input type="number" step="1" name="entregado" class="form-control" id="inputNombre" placeholder="Escriba el nombre del cargo" required>
+                <div class="col-md-3 text-center custom-control custom-switch custom-switch-off-danger custom-switch-on-success ">
+                  <input type="checkbox" class="custom-control-input" name="entregado" id="entregado" value="0" control-id="ControlID-43">
+                  <label class="custom-control-label" for="entregado" id="entregado">Entregado</label>
                 </div>
-                <div class="form-group col-md-3">
-                  <label for="inputNombre">Facturado</label>
-                  <input type="number" step="1" name="facturado" class="form-control" id="inputNombre" placeholder="Escriba el nombre del cargo" required>
+                <div class="col-md-3 text-center custom-control custom-switch custom-switch-off-danger custom-switch-on-success ">
+                  <input type="checkbox" class="custom-control-input" name="facturado" id="facturado" value="0" control-id="ControlID-44">
+                  <label class="custom-control-label" for="facturado" id="facturado">Facturado</label>
                 </div>
               </div>
               <!-- /.card-body -->
@@ -82,3 +92,9 @@
   <script src="/public/plugins/jquery-validation/jquery.validate.min.js"></script>
   <script src="/public/plugins/jquery-validation/additional-methods.min.js"></script>
   <?php include 'vistas/plantilla/script.php'; ?>
+  <script>
+    $(document).ready(function() {
+      $('.cmbBuscarProducto').select2();
+      $('.cmbBuscarSubProducto').select2();
+    });
+  </script>

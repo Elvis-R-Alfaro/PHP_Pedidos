@@ -23,23 +23,24 @@
                     <table class="table m-0">
                       <thead>
                       <tr>
-                        <th>IDDETALLEPEDIDO</th>
-                        <th>IDUSUARIO</th>
+                        <th>N°DETALLEPEDIDO</th>
+                        <th>USUARIO</th>
                         <th>FECHAHORA</th>
+                        <th>ACCIONES</th>
                       </tr>
                       </thead>
                       <tbody>
                       <?php foreach($this->datos as $row) { ?>
                         <tr>
-                          <td><a href="/Pedidoselaborados/buscarid?id=<?php echo $row['iddetallepedido']; ?>"><?php echo $row['iddetallepedido']; ?></a></td>
-                          <td><?php echo $row['idusuario']; ?></td>
+                          <td><a href="/Pedidoselaborados/editar?id=<?php echo $row['iddetallepedido']; ?>"><?php echo $row['iddetallepedido']; ?></a></td>
+                          <td><?php echo $row['loginusuario']; ?></td>
                           <td>
                           <div class="sparkbar" data-color="#00a65a" data-height="20"><?php echo $row['fechahora']; ?></div>
                           </td>
                           <td>
-                            <a class="btn btn-warning" href="/Pedidoselaborados/editar?id=<?php echo $row['iddetallepedido']; ?>">Eliminar</a>
+                            <a class="btn btn-warning" href="/Pedidoselaborados/editar?id=<?php echo $row['iddetallepedido']; ?>"><i class="text-white fas fa-edit"></i></a>
                             <a class="btn btn-danger" onclick = "return confirm('Estas seguro de eliminar?')"
-                             href="/Pedidoselaborados/eliminar?id=<?php echo $row['iddetallepedido']; ?>">Eliminar</a>
+                             href="/Pedidoselaborados/eliminar?id=<?php echo $row['iddetallepedido']; ?>"><i class="text-white fas fa-trash"></i></a>
                           </td>                     
 
                         </tr>  
@@ -53,7 +54,7 @@
                 <!-- /.card-body -->
                 <div class="card-footer clearfix">
                   <a href="/pedidoselaborados/nuevo" class="btn btn-sm btn-info float-left">Generar nuevo pedido Elaborado</a>
-                  <a href="javascript:void(0)" class="btn btn-sm btn-secondary float-right">Buscar pedido </a>
+                  <a href="/pedidoselaborados/buscar" class="btn btn-sm btn-secondary float-right">Buscar pedido </a>
                 </div>
                 <!-- /.card-footer -->
               </div>

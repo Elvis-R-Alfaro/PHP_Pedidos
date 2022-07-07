@@ -1,4 +1,3 @@
-
 <?php include 'vistas/plantilla/encabezado.php'; ?>
 <div class="wrapper">
     <?php
@@ -20,11 +19,14 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-8 offset-md-2">
-                    <form action="/pedidosventas/buscar" method="post">
+                    <form action="/pedidosmesa/buscar" method="post">
                         <div class="input-group input-group-lg">
                             <select class="" id="filtro" name="filtro">
-                                <option value="pedidos_x_ventas.NumeroFactura">N° Factura</option>
-                                <option value="productos.Nombre">Nombre</option>
+                            <option value="pedidos_mesa.idregistro">N° Registro</option>
+                                <option value="pedidos_mesa.idpedido">N° pedido</option>
+                                <option value="mesas_x_area.Mesa">Mesa</option>
+                                <option value="pedidos_mesa.cuenta">Cuenta</option>
+                                <option value="pedidos_mesa.nombrecuenta">Nombre Cuenta</option>
                             </select>
                             <input type="search" id="buscar" name="buscar" class="form-control form-control-lg" placeholder="Buscar" value="">
                             <div class="input-group-append">
@@ -42,9 +44,11 @@
                     <table class="table m-0">
                         <thead>
                             <tr>
-                                <th>N° Factura</th>
+                                <th>REGISTRO</th>
                                 <th>N° PEDIDO</th>
-                                <th>DESCRIPCION</th>
+                                <th>MESA</th>
+                                <th>CUENTA</th>
+                                <th>NOMBRE CUENTA</th>
                                 <!-- <th>ESTADO</th> -->
                             </tr>
                         </thead>
@@ -52,12 +56,14 @@
                             <?php foreach ($this->datos as $row) { ?>
 
                                 <tr>
-                                    <td><a href="/pedidosventas/buscarId?id=<?php echo $row['NumeroFactura']; ?>"><?php echo $row['NumeroFactura']; ?></a></td>
-                                    <td><?php echo $row['NumeroPedido']; ?></td>
-                                    <td><?php echo $row['Nombre']; ?></td>
+                                    <td><a href="/pedidosmesa/buscarId?id=<?php echo $row['idregistro']; ?>"><?php echo $row['idregistro']; ?></a></td>
+                                    <td><?php echo $row['idpedido']; ?></td>
+                                    <td><?php echo $row['Mesa']; ?></td>
+                                    <td><?php echo $row['cuenta']; ?></td>
+                                    <td><?php echo $row['nombrecuenta']; ?></td>
                                     <td>
-                                        <a class="btn btn-warning" href="/pedidosventas/buscarId?id=<?php echo $row['NumeroFactura']; ?>">Editar</a>
-                                        <a class="btn btn-danger" onclick="return confirm('Estas seguro de eliminar?')" href="/pedidosventas/eliminar?id=<?php echo $row['NumeroFactura']; ?>">Eliminar</a>
+                                        <a class="btn btn-warning" href="/pedidosmesa/buscarId?id=<?php echo $row['idregistro']; ?>">Editar</a>
+                                        <a class="btn btn-danger" onclick="return confirm('Estas seguro de eliminar?')" href="/pedidosmesa/eliminar?id=<?php echo $row['idregistro']; ?>">Eliminar</a>
                                     </td>
                                 </tr>
 

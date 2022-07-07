@@ -9,7 +9,7 @@
   <!-- Main content -->
   <section class="content">
         <div class="container-fluid">
-          <h5 class="mb-2 mt-4">Lista de Pedidos</h5>
+          <h5 class="mb-2 mt-4">Lista de Pedidos llevar</h5>
           <div class="row">
             <!-- Left col -->
             <div class="col-md-12">
@@ -26,7 +26,8 @@
                       <tr>
                         <th>ID REGISTRO</th>
                         <th>ID PEDIDO</th>
-                        <th>ID CLIENTE</th>
+                        <th>CLIENTE</th>                        
+                        <th>ACCIONES</th>
                       </tr>
                       </thead>
                       <tbody>
@@ -34,11 +35,11 @@
                         <tr>
                           <td><a href="/pedidosllevar/buscarId?id=<?php echo $row['idregistro']; ?>"><?php echo $row['idregistro']; ?></a></td>
                           <td><?php echo $row['idpedido']; ?></td>
-                          <td><?php echo $row['idcliente']; ?></td>
+                          <td><?php echo $row['nombre']; ?></td>
                           <td>
-                            <a class="btn btn-warning" href="/pedidosllevar/buscarId?id=<?php echo $row['idregistro']; ?>">Editar</a>
+                            <a class="btn btn-warning" href="/pedidosllevar/buscarId?id=<?php echo $row['idregistro']; ?>"><i class="text-white fas fa-edit"></i></a>
                             <a class="btn btn-danger" onclick = "return confirm('Estas seguro de eliminar?')"
-                             href="/pedidosllevar/eliminar?id=<?php echo $row['idregistro']; ?>">Eliminar</a>                            
+                             href="/pedidosllevar/eliminar?id=<?php echo $row['idregistro']; ?>"><i class="text-white fas fa-trash"></i></a>                            
                           </td>
                         </tr>
                         <?php  } ?>
@@ -49,8 +50,8 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer clearfix">
-                  <a href="/pedidosllevar/nuevo" class="btn btn-sm btn-info float-left">nuevo pedido</a>
-                  <a href="javascript:void(0)" class="btn btn-sm btn-secondary float-right">Buscar pedido</a>
+                  <a href="/pedidosllevar/nuevo" class="btn btn-sm btn-info float-left">Nuevo pedido a llevar</a>
+                  <a href="/pedidosllevar/buscar" class="btn btn-sm btn-secondary float-right">Buscar pedido a llevar</a>
                 </div>
                 <!-- /.card-footer -->
               </div>

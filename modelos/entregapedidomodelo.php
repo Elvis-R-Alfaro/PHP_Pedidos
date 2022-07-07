@@ -1,27 +1,28 @@
 <?php
 
-class pedidoselaboradosModelo extends Modelo{
+class entregapedidomodelo extends Modelo{
     function __construct(){
         parent::__construct();
         
     }
     public function insert($datos){
-       $query = $this->db->conectar()->prepare('insert into pedidos_elaborados (iddetallepedido, idusuario, fechahora) value(:iddetallepedido, :idusuario, :fechahora)');
+       $query = $this->db->conectar()->prepare('insert into entrega_pedido (iddetalle_pedido, usuario, fechahora, identrega) value(:iddetalle_pedido, :usuario, :fechahora, :identrega)');
        $query->execute($datos);
     }
     public function listar(){
         $lista=[];
         try{
-            $sql='select pedidos_elaborados.*,usuarios.LoginUsuario from pedidos_elaborados join usuarios on pedidos_elaborados.idusuario=usuarios.idregistro';
+            $sql='select entrega_pedido.*,usuarios.LoginUsuario from entrega_pedido join usuarios on entrega_pedido.usuario=usuarios.idregistro';
             $query = $this->db->conectar()->query($sql);
             foreach($query as $row){
-                $pedidoelaborado=[//esto es un array 18-22
-                    'iddetallepedido'=>$row['iddetallepedido'],
-                    'idusuario'=>$row['idusuario'],
+                $entregapedido=[//esto es un array 18-22
+                    'iddetalle_pedido'=>$row['iddetalle_pedido'],
+                    'usuario'=>$row['usuario'],
                     'fechahora'=>$row['fechahora'],//array que esta dentro de una variable
+                    'identrega'=>$row['identrega'],
                     'loginusuario'=>$row['LoginUsuario']//array que esta dentro de una variable
                 ];
-                array_push($lista, $pedidoelaborado);//lista = array de array o array de 2 dimensiones
+                array_push($lista, $entregapedido);//lista = array de array o array de 2 dimensiones
             }
             return $lista;
         }catch (\Throwable $th){
@@ -31,17 +32,18 @@ class pedidoselaboradosModelo extends Modelo{
 
     public function buscarID($id){
         $lista=[];
-        try{ 
-            $sql='select pedidos_elaborados.*,usuarios.LoginUsuario from pedidos_elaborados JOIN usuarios ON usuarios.idregistro = pedidos_elaborados.idusuario where iddetallepedido ='. $id;
+        try{
+            $sql='select entrega_pedido.*,usuarios.LoginUsuario from entrega_pedido JOIN usuarios ON usuarios.idregistro = entrega_pedido.usuario where iddetalle_pedido ='. $id;
             $query = $this->db->conectar()->query($sql);
             foreach($query as $row){
-                $pedidoelaborado=[//esto es un array 18-22
-                    'iddetallepedido'=>$row['iddetallepedido'],
-                    'idusuario'=>$row['idusuario'],
+                $entregapedido=[//esto es un array 18-22
+                    'iddetalle_pedido'=>$row['iddetalle_pedido'],
+                    'usuario'=>$row['usuario'],
                     'fechahora'=>$row['fechahora'],//array que esta dentro de una variable
+                    'identrega'=>$row['identrega'],
                     'loginusuario'=>$row['LoginUsuario']//array que esta dentro de una variable
                 ]; 
-                array_push($lista, $pedidoelaborado);//lista = array de array o array de 2 dimensiones
+                array_push($lista, $entregapedido);//lista = array de array o array de 2 dimensiones
                 
             }
             return $lista;
@@ -51,13 +53,13 @@ class pedidoselaboradosModelo extends Modelo{
     }
     
     public function actualizar($datos){
-        $query = $this->db->conectar()->prepare(' update pedidos_elaborados set idusuario=:idusuario, fechahora=:fechahora where iddetallepedido=:iddetallepedido ');
+        $query = $this->db->conectar()->prepare(' update entrega_pedido set usuario=:usuario, fechahora=:fechahora, identrega=:identrega  where iddetalle_pedido=:iddetalle_pedido ');
         $query->execute($datos);
      }
 
      public function eliminar($id){
         try {
-            $query = $this->db->conectar()->query('delete from pedidos_elaborados where iddetallepedido='.$id);
+            $query = $this->db->conectar()->query('delete from entrega_pedido where iddetalle_pedido='.$id);
             $query->execute();
             return $query;
         } catch (Throwable $th) {
@@ -72,11 +74,11 @@ class pedidoselaboradosModelo extends Modelo{
             $sql='select idregistro, LoginUsuario from usuarios';
             $query = $this->db->conectar()->query($sql);
             foreach($query as $row){
-                $pedidoelaborado=[//esto es un array 18-22
+                $entregapedido=[//esto es un array 18-22
                     'idregistro'=>$row['idregistro'],
                     'loginusuario'=>$row['LoginUsuario']//array que esta dentro de una variable
                 ];
-                array_push($lista, $pedidoelaborado);//lista = array de array o array de 2 dimensiones
+                array_push($lista, $entregapedido);//lista = array de array o array de 2 dimensiones
             }
             return $lista;
         }catch (\Throwable $th){
@@ -88,20 +90,21 @@ class pedidoselaboradosModelo extends Modelo{
         $lista=[];
         try {            
             if($buscar == ''){
-                $sql = 'select pedidos_elaborados.*,usuarios.LoginUsuario from pedidos_elaborados join usuarios on pedidos_elaborados.idusuario=usuarios.idregistro';
+                $sql = 'select entrega_pedido.*,usuarios.LoginUsuario from entrega_pedido join usuarios on entrega_pedido.usuario=usuarios.idregistro';
             }
             else{
-                $sql = 'select pedidos_elaborados.*,usuarios.LoginUsuario from pedidos_elaborados inner join usuarios on pedidos_elaborados.idusuario=usuarios.idregistro
+                $sql = 'select entrega_pedido.*,usuarios.LoginUsuario from entrega_pedido inner join usuarios on entrega_pedido.usuario=usuarios.idregistro
                 WHERE '.$filtro .' LIKE "%'.$buscar.'%"';
             }
             
             $query = $this->db->conectar()->query($sql);
             foreach ($query as $row) {
                 $pedido =[
-                    'iddetallepedido'=>$row['iddetallepedido'],
-                    'idusuario'=>$row['idusuario'],
+                    'iddetalle_pedido'=>$row['iddetalle_pedido'],
+                    'usuario'=>$row['usuario'],
                     'fechahora'=>$row['fechahora'],//array que esta dentro de una variable
-                    'loginusuario'=>$row['LoginUsuario']//array que esta dentro de una variable
+                    'identrega'=>$row['identrega'],
+                    'loginusuario'=>$row['LoginUsuario']//array que esta dentro de una variables
                     
                 ];
                 
