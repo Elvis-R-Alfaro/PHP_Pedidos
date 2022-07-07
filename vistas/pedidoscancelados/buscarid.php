@@ -35,7 +35,7 @@
                   <select class="form-control" name="usuario">
                     <option value="<?php echo $this->datos[0]['usuario'] ?>"selected disable hidden> <?php echo $this->datos[0]['LoginUsuario'] ?></option>
                     <?php
-                    foreach ($this->datos as $usuario) { ?>
+                    foreach ($this->usuarios as $usuario) { ?>
                       <option value=" <?php echo $usuario['idregistro'] ?>"><?php echo $usuario['LoginUsuario'] ?></option>
                     <?php
                     }

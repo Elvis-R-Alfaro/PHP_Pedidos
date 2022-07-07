@@ -263,7 +263,7 @@
           </li>
           <li class="nav-item">
             <a href="/" class="nav-link">
-              <i class="nav-icon fas fa-box"></i>
+              <i class="nav-icon fas fa-chair"></i>
               <p>
                 Pedidos Mesa
                 <i class="fas fa-angle-left right"></i>
